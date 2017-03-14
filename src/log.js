@@ -13,6 +13,7 @@ function loggerFactory(label) {
     transports: [
       new winston.transports.Console({
         json: true,
+        stringify: true,
         label,
         level: label === 'server' ? 'warn' : config.get('log.level'),
         timestamp,
