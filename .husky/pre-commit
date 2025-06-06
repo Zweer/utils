@@ -1,9 +1,9 @@
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-# npm run test:coverage
-# npm run script:coverage
-# git add ./README.md
+npm run test:coverage
+npm run script:coverage
+git add ./README.md
 # npm run script:export
 # git add ./docs/EXPORT.md
 npm run lint:fix
