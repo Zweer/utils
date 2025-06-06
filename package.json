@@ -1,0 +1,24 @@
+{
+  "name": "@zweer/utils",
+  "version": "0.0.0",
+  "description": "A utility library, containing many usefull scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zweer/utils.git"
+  },
+  "keywords": [
+    "utils",
+    "scripts",
+    "misc"
+  ],
+  "author": "Zweer <n.olivieriachille@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zweer/utils/issues"
+  },
+  "homepage": "https://github.com/Zweer/utils#readme"
+}
