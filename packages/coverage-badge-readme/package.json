@@ -5,7 +5,7 @@
   "description": "A small utility to apply your coverage badge on the README file",
   "author": "Zweer <n.olivieriachille@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/Zweer/utils#readme",
+  "homepage": "https://github.com/Zweer/utils/tree/main/packages/coverage-badge-readme#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Zweer/utils.git",
