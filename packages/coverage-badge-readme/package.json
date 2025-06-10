@@ -1,6 +1,7 @@
 {
   "name": "@zweer/coverage-badge-readme",
-  "version": "0.0.0",
+  "type": "module",
+  "version": "0.0.1",
   "description": "A small utility to apply your coverage badge on the README file",
   "author": "Zweer <n.olivieriachille@gmail.com>",
   "license": "MIT",
@@ -33,6 +34,8 @@
     "node": ">= 20"
   },
   "scripts": {
+    "lint:engines": "ls-engines",
+    "lint:publish": "publint --strict",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

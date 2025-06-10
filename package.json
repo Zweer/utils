@@ -1,5 +1,6 @@
 {
   "name": "@zweer/utils",
+  "type": "module",
   "version": "0.0.0",
   "description": "A utility library, containing many usefull scripts",
   "author": "Zweer <n.olivieriachille@gmail.com>",
@@ -17,12 +18,14 @@
     "scripts",
     "misc"
   ],
-  "main": "index.js",
+  "engines": {
+    "node": ">= 20"
+  },
   "scripts": {
     "lint:eslint": "eslint . --fix",
     "lint:lockfile": "lockfile-lint --path package-lock.json",
-    "lint:engines": "ls-engines",
-    "lint:publish": "publint --strict",
+    "lint:engines": "npm run --workspaces lint:engines",
+    "lint:publish": "npm run --workspaces lint:publish",
     "lint": "concurrently npm:lint:* --prefixColors auto",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -31,7 +34,7 @@
     "clean": "rimraf --glob ./packages/*/{cli,lib,test}/**/*.{d.ts,js} ./vitest*.{d.ts,js}",
     "prebuild": "npm run clean",
     "build": "tsc",
-    "release": "semantic-release"
+    "release": "semantic-release -e semantic-release-monorepo"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.14.1",
@@ -50,6 +53,7 @@
     "publint": "^0.3.12",
     "rimraf": "^6.0.1",
     "semantic-release": "^24.2.5",
+    "semantic-release-monorepo": "^8.0.2",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vitest": "^3.2.2"

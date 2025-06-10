@@ -27,9 +27,14 @@ vi.mock(import('node:path'), async (importOriginal) => {
   return {
     ...path,
     join: vi.fn((...args: string[]) => {
-      const realRootPath = path.dirname(path.dirname(import.meta.dirname));
-      if (args[0].startsWith(realRootPath)) {
-        args[0] = args[0].replace(realRootPath, rootPath);
+      const realRootPath1 = path.dirname(path.dirname(import.meta.dirname));
+      if (args[0].startsWith(realRootPath1)) {
+        args[0] = args[0].replace(realRootPath1, rootPath);
+      }
+
+      const realRootPath2 = path.dirname(path.dirname(path.dirname(path.dirname(import.meta.dirname))));
+      if (args[0].startsWith(realRootPath2)) {
+        args[0] = args[0].replace(realRootPath2, rootPath);
       }
 
       return path.join(...args);

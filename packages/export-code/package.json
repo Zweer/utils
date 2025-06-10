@@ -1,6 +1,6 @@
 {
   "name": "@zweer/export-code",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A small utility to export all the repo code into a single md file",
   "author": "Zweer <n.olivieriachille@gmail.com>",
   "license": "MIT",
@@ -9,8 +9,12 @@
     "export",
     "code"
   ],
-  "main": "index.js",
+  "engines": {
+    "node": ">= 20"
+  },
   "scripts": {
+    "lint:engines": "ls-engines",
+    "lint:publish": "publint --strict",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {}
