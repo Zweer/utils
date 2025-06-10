@@ -30,6 +30,7 @@ jobs:
       - test
     permissions:
       contents: write
+      issues: write
       pull-requests: write
     steps:
       - uses: googleapis/release-please-action@v4
