@@ -1,7 +1,7 @@
 {
   "name": "@zweer/utils",
   "type": "module",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A utility library, containing many usefull scripts",
   "author": "Zweer <n.olivieriachille@gmail.com>",
   "license": "MIT",
