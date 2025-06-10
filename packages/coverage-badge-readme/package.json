@@ -1,0 +1,45 @@
+{
+  "name": "@zweer/coverage-badge-readme",
+  "version": "0.0.0",
+  "description": "A small utility to apply your coverage badge on the README file",
+  "author": "Zweer <n.olivieriachille@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Zweer/utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zweer/utils.git",
+    "directory": "packages/coverage-badge-readme"
+  },
+  "bugs": {
+    "url": "https://github.com/Zweer/utils/issues"
+  },
+  "keywords": [
+    "utility",
+    "coverage",
+    "badge",
+    "readme"
+  ],
+  "exports": {
+    "./cli": "./cli/program.js",
+    "./badge": "./lib/badge.js",
+    "./coverage": "./lib/coverage.js",
+    "./readme": "./lib/readme.js"
+  },
+  "files": [
+    "cli/**/*.{d.ts,js}",
+    "lib/**/*.{d.ts,js}"
+  ],
+  "engines": {
+    "node": ">= 20"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@commander-js/extra-typings": "^14.0.0",
+    "commander": "^14.0.0",
+    "dree": "^5.1.5",
+    "ignore": "^7.0.5",
+    "memfs": "^4.17.2"
+  }
+}

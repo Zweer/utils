@@ -1,0 +1,17 @@
+{
+  "name": "@zweer/export-code",
+  "version": "0.0.0",
+  "description": "A small utility to export all the repo code into a single md file",
+  "author": "Zweer <n.olivieriachille@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "utility",
+    "export",
+    "code"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {}
+}

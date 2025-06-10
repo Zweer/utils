@@ -1,7 +1,6 @@
 import antfu from '@antfu/eslint-config';
 
 export default antfu({
-  react: true,
   stylistic: {
     semi: true,
     overrides: {
@@ -29,4 +28,16 @@ export default antfu({
       ],
     }],
   },
+}, {
+  rules: {
+    'ts/no-unsafe-argument': 'off',
+    'ts/no-unsafe-assignment': 'off',
+    'ts/no-unsafe-call': 'off',
+    'ts/no-unsafe-member-access': 'off',
+    'ts/no-unsafe-return': 'off',
+  },
+  files: [
+    'packages/coverage-badge-readme/cli/**/*',
+    'packages/coverage-badge-readme/test/cli/**/*',
+  ],
 });
