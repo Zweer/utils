@@ -1,9 +1,19 @@
 {
   "name": "@zweer/export-code",
+  "type": "module",
   "version": "0.0.1",
   "description": "A small utility to export all the repo code into a single md file",
   "author": "Zweer <n.olivieriachille@gmail.com>",
   "license": "MIT",
+  "homepage": "https://github.com/Zweer/utils/tree/main/packages/export-code#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zweer/utils.git",
+    "directory": "packages/export-code"
+  },
+  "bugs": {
+    "url": "https://github.com/Zweer/utils/issues"
+  },
   "keywords": [
     "utility",
     "export",
