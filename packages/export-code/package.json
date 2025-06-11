@@ -14,8 +14,11 @@
   },
   "scripts": {
     "lint:engines": "ls-engines",
-    "lint:publish": "publint --strict",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:publish": "publint --strict"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "devDependencies": {}
 }

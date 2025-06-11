@@ -2,6 +2,7 @@
   "name": "@zweer/utils",
   "type": "module",
   "version": "0.0.0",
+  "private": "true",
   "description": "A utility library, containing many usefull scripts",
   "author": "Zweer <n.olivieriachille@gmail.com>",
   "license": "MIT",
@@ -34,6 +35,14 @@
     "clean": "rimraf --glob ./packages/*/{cli,lib,test}/**/*.{d.ts,js} ./vitest*.{d.ts,js}",
     "prebuild": "npm run clean",
     "build": "tsc"
+  },
+  "lockfile-lint": {
+    "path": "package-lock.json",
+    "type": "npm",
+    "validate-https": true,
+    "allowed-hosts": [
+      "npm"
+    ]
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.14.1",
