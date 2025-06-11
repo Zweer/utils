@@ -44,6 +44,16 @@
       "npm"
     ]
   },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
   "devDependencies": {
     "@anolilab/multi-semantic-release": "^1.1.12",
     "@antfu/eslint-config": "^4.14.1",
