@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directories:
+      - /
+      - /packages/coverage-badge-readme
+      - /packages/export-code
+schedule:
+  interval: weekly
