@@ -5,5 +5,5 @@ updates:
       - /
       - /packages/coverage-badge-readme
       - /packages/export-code
-schedule:
-  interval: weekly
+    schedule:
+      interval: weekly
