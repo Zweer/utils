@@ -37,7 +37,42 @@ describe('generateExportFile', () => {
 
     const output = vol.readFileSync(EXPORT_PATH, 'utf8') as string;
 
-    expect(output).toMatchSnapshot();
+    expect(output).toBe(`# EXPORT
+
+## File structure
+
+\`\`\`
+project
+├── README.md
+└── src
+    ├── index.ts
+    └── utils.js
+\`\`\`
+
+## File export
+
+/project/src/index.ts
+
+\`\`\`\`typescript
+console.log("Hello, TypeScript!");
+\`\`\`\`
+
+---
+
+/project/README.md
+
+\`\`\`\`markdown
+# My Awesome Project
+\`\`\`\`
+
+---
+
+/project/src/utils.js
+
+\`\`\`\`javascript
+const a = () => \`hello \`\`\` world\`;
+\`\`\`\`
+`);
   });
 
   it('should correctly apply a custom template', () => {
@@ -52,8 +87,7 @@ Files:
 {NOTLAST}
 *** SEPARATOR ***
 {NOTLAST}
-{FILES}
-`;
+{FILES}`;
 
     generateExportFile(MOCK_FILENAMES, MOCK_TREE, EXPORT_PATH, customTemplate);
 
@@ -63,7 +97,32 @@ Files:
     expect(output).toContain('*** SEPARATOR ***');
     expect(output).not.toContain('## File structure');
 
-    expect(output).toMatchSnapshot();
+    expect(output).toBe(`MY CUSTOM EXPORT
+Tree:
+project
+├── README.md
+└── src
+    ├── index.ts
+    └── utils.js
+
+Files:
+--- FILE: /project/src/index.ts ---
+\`\`\`\`typescript
+console.log("Hello, TypeScript!");
+\`\`\`\`
+
+*** SEPARATOR ***
+--- FILE: /project/README.md ---
+\`\`\`\`markdown
+# My Awesome Project
+\`\`\`\`
+
+*** SEPARATOR ***
+--- FILE: /project/src/utils.js ---
+\`\`\`\`javascript
+const a = () => \`hello \`\`\` world\`;
+\`\`\`\`
+`);
   });
 
   it('should throw an error if the template is invalid (missing {FILES})', () => {
@@ -75,7 +134,7 @@ Files:
   });
 
   it('should not include the {NOTLAST} separator for the last file', () => {
-    const template = `{FILES}{FILENAME}{NOTLAST}---{NOTLAST}{FILES}`;
+    const template = '{FILES}\n{FILENAME}{NOTLAST}---{NOTLAST}\n{FILES}';
 
     generateExportFile(MOCK_FILENAMES, MOCK_TREE, EXPORT_PATH, template);
 
@@ -95,7 +154,21 @@ Files:
     expect(output).not.toContain('{FILENAME}');
     expect(output).not.toContain('{CODE}');
 
-    expect(output).toMatchSnapshot();
+    expect(output).toBe(`# EXPORT
+
+## File structure
+
+\`\`\`
+project
+├── README.md
+└── src
+    ├── index.ts
+    └── utils.js
+\`\`\`
+
+## File export
+
+`);
   });
 
   it('should correctly handle a single file in the list (no separator)', () => {
@@ -106,7 +179,23 @@ Files:
 
     expect(output).not.toContain('\n---\n');
     expect(output).toContain('# My Awesome Project');
-    expect(output).toMatchSnapshot();
+    expect(output).toBe(`# EXPORT
+
+## File structure
+
+\`\`\`
+project
+└── README.md
+\`\`\`
+
+## File export
+
+/project/README.md
+
+\`\`\`\`markdown
+# My Awesome Project
+\`\`\`\`
+`);
   });
 
   it('should correctly create code blocks with language identifiers', () => {

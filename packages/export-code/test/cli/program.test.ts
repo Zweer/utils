@@ -9,7 +9,7 @@ import { afterEach, beforeEach, describe, expect, vi } from 'vitest';
 
 import { buildProgram } from '../../cli/program.js';
 
-const rootPath = process.cwd();
+const rootPath = vi.hoisted(() => '/fake/root/path');
 
 vi.mock('node:fs', async () => {
   const { fs } = await import('memfs');
@@ -68,6 +68,8 @@ describe('cli -> program', () => {
     existsSyncSpy = vi.spyOn(fs, 'existsSync');
     readFileSyncSpy = vi.spyOn(fs, 'readFileSync');
     writeFileSyncSpy = vi.spyOn(fs, 'writeFileSync');
+
+    vi.spyOn(process, 'cwd').mockReturnValue(rootPath);
   });
 
   afterEach(() => {
@@ -114,7 +116,51 @@ describe('cli -> program', () => {
       expect(writeFileSyncSpy).toHaveBeenCalledWith(exportPath, expect.any(String));
 
       const output = vol.readFileSync(exportPath, 'utf8') as string;
-      expect(output).toMatchSnapshot();
+      expect(output).toBe(`# EXPORT
+
+## File structure
+
+\`\`\`
+path
+├── .gitignore
+├── README.md
+├── a.ts
+└── package.json
+
+\`\`\`
+
+## File export
+
+/fake/root/path/.gitignore
+
+\`\`\`\`
+
+\`\`\`\`
+
+---
+
+/fake/root/path/README.md
+
+\`\`\`\`markdown
+# Foo
+\`\`\`\`
+
+---
+
+/fake/root/path/a.ts
+
+\`\`\`\`typescript
+console.log(1);
+\`\`\`\`
+
+---
+
+/fake/root/path/package.json
+
+\`\`\`\`json
+{"name":"@zweer/export-code","version":"1.2.3","description":"A small utility to export all the repo code into a single md file"}
+\`\`\`\`
+`);
     });
   });
 

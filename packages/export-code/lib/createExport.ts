@@ -15,10 +15,9 @@ const defaultTemplate = `# EXPORT
 {FILENAME}
 
 {CODE}
-
 {NOTLAST}
-
 ---
+
 {NOTLAST}
 {FILES}`;
 
@@ -47,7 +46,7 @@ export function generateExportFile(
   exportPath: string,
   template: string = defaultTemplate,
 ): void {
-  const fileLoopRegex = /\{FILES\}(.*?)\{FILES\}/s;
+  const fileLoopRegex = /\{FILES\}\n(.*?)\n\{FILES\}/s;
   const loopMatch = template.match(fileLoopRegex);
 
   if (!loopMatch || !loopMatch[1]) {
