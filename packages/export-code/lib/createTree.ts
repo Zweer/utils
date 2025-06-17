@@ -1,4 +1,4 @@
-import { relative, sep } from 'node:path';
+import { relative } from 'node:path';
 
 interface FileTree {
   [key: string]: FileTree | null;
@@ -9,30 +9,35 @@ export function createFileTree(filenames: string[]) {
     return '';
   }
 
+  const normalizedFilenames = filenames.map(filename => filename.replace(/\\/g, '/'));
+
   // 1. Find the common base path to determine the root of the tree.
   // We split all paths into components and find the common prefix.
-  const pathComponents = filenames.map(p => p.split(sep));
+  const pathComponents = normalizedFilenames.map(p => p.split('/'));
   const commonBase = [...pathComponents[0]];
 
-  for (let i = 1; i < pathComponents.length; i++) {
-    const currentPath = pathComponents[i];
-    let j = 0;
-    while (j < commonBase.length && j < currentPath.length && commonBase[j] === currentPath[j]) {
-      j++;
+  if (pathComponents.length === 1) {
+    commonBase.length = commonBase.length - 1;
+  } else {
+    for (let i = 1; i < pathComponents.length; i++) {
+      const currentPath = pathComponents[i];
+      let j = 0;
+      while (j < commonBase.length && j < currentPath.length && commonBase[j] === currentPath[j]) {
+        j++;
+      }
+      commonBase.length = j; // Trim the commonBase to the shared part
     }
-    commonBase.length = j; // Trim the commonBase to the shared part
   }
 
-  const commonPath = commonBase.join(sep);
+  const commonPath = commonBase.join('/');
   const rootLabel = commonBase.length > 0 ? commonBase[commonBase.length - 1] : 'root';
 
   // 2. Build a hierarchical tree object from the paths.
   // 'src/utils/helpers.ts' becomes { src: { utils: { 'helpers.ts': null } } }
   const tree: FileTree = {};
-  for (const filepath of filenames) {
+  for (const filepath of normalizedFilenames) {
     const relativePath = relative(commonPath, filepath);
-    // On Windows, relative path can use '\', normalize to '/' for splitting
-    const parts = relativePath.split(sep);
+    const parts = relativePath.split('/');
     let currentNode = tree;
 
     for (let i = 0; i < parts.length; i++) {

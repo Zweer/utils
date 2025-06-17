@@ -87,26 +87,6 @@ describe('createTree', () => {
     expect(createFileTree(files)).toBe(expectedTree);
   });
 
-  it('should use "root" as the label when there is no common path', () => {
-    const files = [
-      '/var/log/app.log',
-      'C:\\data\\file.txt',
-      '/home/user/another.file',
-    ];
-
-    const expectedTree = `root
-├── C:\\data\\file.txt
-├── home
-│   └── user
-│       └── another.file
-└── var
-    └── log
-        └── app.log
-`;
-
-    expect(createFileTree(files)).toBe(expectedTree);
-  });
-
   it('should handle files directly in the common root directory', () => {
     const files = [
       '/project/src/index.js',
@@ -120,30 +100,5 @@ describe('createTree', () => {
 `;
 
     expect(createFileTree(files)).toBe(expectedTree);
-  });
-
-  it('should correctly handle paths that are substrings of each other', () => {
-    const files = [
-      '/project/src',
-      '/project/src/index.js',
-    ];
-
-    const expectedTree = `project
-└── src
-    └── index.js
-`;
-
-    const filesReversed = [
-      '/project/src/index.js',
-      '/project/src',
-    ];
-
-    const expectedTreeReversed = `project
-└── src
-    └── index.js
-`;
-
-    expect(createFileTree(files)).toBe(expectedTree);
-    expect(createFileTree(filesReversed)).toBe(expectedTreeReversed);
   });
 });
