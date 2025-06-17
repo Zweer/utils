@@ -1,0 +1,126 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generateExportFile > should correctly apply a custom template 1`] = `
+"MY CUSTOM EXPORT
+Tree:
+project
+├── README.md
+└── src
+    ├── index.ts
+    └── utils.js
+
+Files:
+
+--- FILE: /project/src/index.ts ---
+\`\`\`\`typescript
+console.log("Hello, TypeScript!");
+\`\`\`\`
+
+*** SEPARATOR ***
+
+
+--- FILE: /project/README.md ---
+\`\`\`\`markdown
+# My Awesome Project
+\`\`\`\`
+
+*** SEPARATOR ***
+
+
+--- FILE: /project/src/utils.js ---
+\`\`\`\`javascript
+const a = () => \`hello \`\`\` world\`;
+\`\`\`\`
+
+
+"
+`;
+
+exports[`generateExportFile > should correctly handle a single file in the list (no separator) 1`] = `
+"# EXPORT
+
+## File structure
+
+\`\`\`
+project
+└── README.md
+\`\`\`
+
+## File export
+
+
+/project/README.md
+
+\`\`\`\`markdown
+# My Awesome Project
+\`\`\`\`
+
+
+"
+`;
+
+exports[`generateExportFile > should generate a file using the default template 1`] = `
+"# EXPORT
+
+## File structure
+
+\`\`\`
+project
+├── README.md
+└── src
+    ├── index.ts
+    └── utils.js
+\`\`\`
+
+## File export
+
+
+/project/src/index.ts
+
+\`\`\`\`typescript
+console.log("Hello, TypeScript!");
+\`\`\`\`
+
+
+
+---
+
+
+/project/README.md
+
+\`\`\`\`markdown
+# My Awesome Project
+\`\`\`\`
+
+
+
+---
+
+
+/project/src/utils.js
+
+\`\`\`\`javascript
+const a = () => \`hello \`\`\` world\`;
+\`\`\`\`
+
+
+"
+`;
+
+exports[`generateExportFile > should handle an empty list of filenames gracefully 1`] = `
+"# EXPORT
+
+## File structure
+
+\`\`\`
+project
+├── README.md
+└── src
+    ├── index.ts
+    └── utils.js
+\`\`\`
+
+## File export
+
+"
+`;
