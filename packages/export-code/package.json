@@ -19,6 +19,17 @@
     "export",
     "code"
   ],
+  "exports": {
+    "./cli": "./cli/program.js",
+    "./createExport": "./lib/createExport.js",
+    "./createTree": "./lib/createTree.js",
+    "./retrieveFilenames": "./lib/retrieveFilenames.js"
+  },
+  "bin": "./cli",
+  "files": [
+    "cli/**/*.{d.ts,js}",
+    "lib/**/*.{d.ts,js}"
+  ],
   "engines": {
     "node": ">= 20"
   },

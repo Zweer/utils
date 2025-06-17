@@ -26,6 +26,7 @@
     "./coverage": "./lib/coverage.js",
     "./readme": "./lib/readme.js"
   },
+  "bin": "./cli",
   "files": [
     "cli/**/*.{d.ts,js}",
     "lib/**/*.{d.ts,js}"
