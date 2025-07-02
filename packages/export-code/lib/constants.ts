@@ -5,6 +5,7 @@ export const defaultIgnoreList = [
   '*.ico',
   '*.png',
   '*.jpg',
+  '*.psd',
   'docs/EXPORT.md',
   'package-lock.json',
 ];
