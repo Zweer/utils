@@ -1,3 +1,10 @@
+## @zweer/coverage-badge-readme [1.2.1](https://github.com/Zweer/utils/compare/@zweer/coverage-badge-readme@1.2.0...@zweer/coverage-badge-readme@1.2.1) (2025-07-02)
+
+
+### Bug Fixes
+
+* :ambulance: Added the `index.js` part to the bin prop and the shebang ([2896025](https://github.com/Zweer/utils/commit/28960255a2e2593c15ce59a7e39df9000a3c6a5d))
+
 # @zweer/coverage-badge-readme [1.2.0](https://github.com/Zweer/utils/compare/@zweer/coverage-badge-readme@1.1.1...@zweer/coverage-badge-readme@1.2.0) (2025-06-17)
 
 
