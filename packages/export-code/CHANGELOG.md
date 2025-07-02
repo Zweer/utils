@@ -1,3 +1,10 @@
+## @zweer/export-code [1.2.2](https://github.com/Zweer/utils/compare/@zweer/export-code@1.2.1...@zweer/export-code@1.2.2) (2025-07-02)
+
+
+### Performance Improvements
+
+* **export:** :see_no_evil: Added the `.psd` files to the ignore list ([502bc53](https://github.com/Zweer/utils/commit/502bc53810efe0f007ffcfd9cc7f39cc57df3e45))
+
 ## @zweer/export-code [1.2.1](https://github.com/Zweer/utils/compare/@zweer/export-code@1.2.0...@zweer/export-code@1.2.1) (2025-07-02)
 
 
