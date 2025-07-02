@@ -25,7 +25,7 @@
     "./createTree": "./lib/createTree.js",
     "./retrieveFilenames": "./lib/retrieveFilenames.js"
   },
-  "bin": "./cli",
+  "bin": "./cli/index.js",
   "files": [
     "cli/**/*.{d.ts,js}",
     "lib/**/*.{d.ts,js}"
