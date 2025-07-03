@@ -1,3 +1,15 @@
+# @zweer/export-code [1.3.0](https://github.com/Zweer/utils/compare/@zweer/export-code@1.2.2...@zweer/export-code@1.3.0) (2025-07-03)
+
+
+### Bug Fixes
+
+* **export:** :white_check_mark: Fixes the missing test ([88c7d38](https://github.com/Zweer/utils/commit/88c7d38f27e4224f8dce00aad0d227f8e1a728fb))
+
+
+### Features
+
+* **export-code:** Add --ignore-list CLI option ([3f06080](https://github.com/Zweer/utils/commit/3f06080ee0dbd69dad58ca4894320144b7c736fd))
+
 ## @zweer/export-code [1.2.2](https://github.com/Zweer/utils/compare/@zweer/export-code@1.2.1...@zweer/export-code@1.2.2) (2025-07-02)
 
 
