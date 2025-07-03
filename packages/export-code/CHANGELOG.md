@@ -1,3 +1,10 @@
+## @zweer/export-code [1.3.1](https://github.com/Zweer/utils/compare/@zweer/export-code@1.3.0...@zweer/export-code@1.3.1) (2025-07-03)
+
+
+### Performance Improvements
+
+* **export:** :sparkles: Added `mjs` and `sql` extensions ([35bb68b](https://github.com/Zweer/utils/commit/35bb68b6a63c36646444c3da51df9e5b522d7d6c))
+
 # @zweer/export-code [1.3.0](https://github.com/Zweer/utils/compare/@zweer/export-code@1.2.2...@zweer/export-code@1.3.0) (2025-07-03)
 
 

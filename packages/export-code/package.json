@@ -1,7 +1,7 @@
 {
   "name": "@zweer/export-code",
   "type": "module",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A small utility to export all the repo code into a single md file",
   "author": "Zweer <n.olivieriachille@gmail.com>",
   "license": "MIT",
