@@ -162,6 +162,75 @@ console.log(1);
 \`\`\`\`
 `);
     });
+
+    describe('--ignore-list option', () => {
+      beforeEach(() => {
+        // Reset vol and set up a more complex file structure for ignore testing
+        vol.reset();
+        vol.fromNestedJSON({
+          [rootPath]: {
+            [packagePath]: JSON.stringify({ name, version, description }),
+            'src': {
+              'index.ts': 'console.log("hello index");',
+              'moduleA.ts': 'export const A = "A";',
+              'moduleB.js': 'module.exports = "B";',
+              'generated': {
+                'types.ts': 'export type MyType = string;',
+              },
+            },
+            'tests': {
+              'index.test.ts': '// test for index',
+              'moduleA.test.ts': '// test for moduleA',
+            },
+            'README.md': '# Project Readme',
+            '.gitignore': ['node_modules', 'dist', '*.log'].join('\n'),
+            'config.json': '{ "key": "value" }',
+            'output.log': 'some log data',
+          },
+        });
+      });
+
+      it('should ignore files specified in --ignore-list', () => {
+        buildProgram().parse(['--ignore-list', 'src/generated/**,*.test.ts,README.md'], { from: 'user' });
+        const output = vol.readFileSync(exportPath, 'utf8') as string;
+
+        expect(output).not.toContain('src/generated/types.ts');
+        expect(output).not.toContain('tests/index.test.ts');
+        expect(output).not.toContain('tests/moduleA.test.ts');
+        expect(output).not.toContain('/fake/root/path/README.md');
+        expect(output).toContain('src/index.ts');
+        expect(output).toContain('config.json');
+      });
+
+      it('should handle an empty --ignore-list', () => {
+        buildProgram().parse(['--ignore-list', ''], { from: 'user' });
+        const output = vol.readFileSync(exportPath, 'utf8') as string;
+
+        // Should behave as if --ignore-list was not provided, respecting .gitignore
+        expect(output).toContain('src/index.ts');
+        expect(output).toContain('README.md');
+        expect(output).not.toContain('output.log'); // from .gitignore
+      });
+
+      it('should correctly parse comma-separated values with spaces', () => {
+        buildProgram().parse(['--ignore-list', ' src/generated/** , *.test.ts , README.md '], { from: 'user' });
+        const output = vol.readFileSync(exportPath, 'utf8') as string;
+
+        expect(output).not.toContain('src/generated/types.ts');
+        expect(output).not.toContain('tests/index.test.ts');
+        expect(output).not.toContain('/fake/root/path/README.md');
+        expect(output).toContain('src/index.ts');
+      });
+
+      it('should still respect .gitignore when --ignore-list is used', () => {
+        buildProgram().parse(['--ignore-list', 'README.md'], { from: 'user' });
+        const output = vol.readFileSync(exportPath, 'utf8') as string;
+
+        expect(output).not.toContain('/fake/root/path/README.md');
+        expect(output).not.toContain('output.log'); // from .gitignore
+        expect(output).toContain('src/index.ts');
+      });
+    });
   });
 
   describe('version', () => {
@@ -184,10 +253,11 @@ console.log(1);
 ${description}
 
 Options:
-  -V, --version         output the version number
-  --export-path <PATH>  The path of the EXPORT file (default:
-                        \"${rootPath}/docs/EXPORT.md\")
-  -h, --help            display help for command
+  -V, --version              output the version number
+  --export-path <PATH>       The path of the EXPORT file (default:
+                             \"${rootPath}/docs/EXPORT.md\")
+  --ignore-list <paths>      Comma-separated string of paths to ignore
+  -h, --help                 display help for command
 `;
 
     it.each(['--help', '-h'])('should print the help message when "%s"', (helpOption) => {

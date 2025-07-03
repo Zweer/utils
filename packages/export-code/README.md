@@ -92,12 +92,17 @@ export const a = () => {
 | Argument | Description | Default | Required |
 | :--- | :--- | :--- | :--- |
 | `[outputFile]` | The path where the final text file will be saved. | `docs/EXPORT.md`| No |
+| `--ignore-list <paths>` | A comma-separated list of glob patterns to ignore. For example: `src/generated/**,*.test.ts` | `''` | No |
 
 ### Ignoring Files
 
 By default, `export-code` respects the rules found in your project's `.gitignore` file. It will automatically skip `node_modules`, build artifacts, and other ignored files.
 
-**Future Work:** A `--ignore` flag is planned to allow for additional custom ignore patterns directly from the command line.
+You can also provide additional ignore patterns using the `--ignore-list` command-line argument. This argument accepts a comma-separated string of glob patterns. For example, to ignore all files in `src/generated` and all files ending with `.test.ts`, you would use:
+
+```bash
+npx export-code --ignore-list "src/generated/**,*.test.ts"
+```
 
 ## 📄 License
 

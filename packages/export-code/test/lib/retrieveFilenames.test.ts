@@ -123,6 +123,58 @@ describe('retrieveFilenames', () => {
     expect(files).toEqual([`${rootPath}/.gitignore`]);
   });
 
+  it('should use customIgnoreList to ignore specific files', () => {
+    const files = retrieveFilenames({
+      customIgnoreList: ['src/index.ts', 'README.md'],
+    });
+    const expectedFiles = [
+      '/.gitignore',
+      '/package.json',
+      '/src/utils/helpers.ts',
+    ].map(file => `${rootPath}${file}`).sort();
+    expect(files).toEqual(expectedFiles);
+  });
+
+  it('should use customIgnoreList with patterns', () => {
+    const files = retrieveFilenames({
+      customIgnoreList: ['src/**', '*.md'],
+    });
+    const expectedFiles = ['/.gitignore', '/package.json'].map(file => `${rootPath}${file}`).sort();
+    expect(files).toEqual(expectedFiles);
+  });
+
+  it('should combine customIgnoreList with default ignoreList and .gitignore', () => {
+    // .gitignore ignores: 'node_modules', 'dist', '.env', '*.log'
+    // default ignoreList (from constants.ts, assuming it includes e.g. '.git/')
+    // customIgnoreList ignores: 'package.json'
+    // retrieveFilenames by default has `useGitIgnore: true` and uses `defaultIgnoreList`
+    const files = retrieveFilenames({
+      customIgnoreList: ['package.json'],
+    });
+    const expectedFiles = [
+      '/.gitignore',
+      '/README.md',
+      '/src/index.ts',
+      '/src/utils/helpers.ts',
+    ].map(file => `${rootPath}${file}`).sort();
+    expect(files).toEqual(expectedFiles);
+  });
+
+  it('should use customIgnoreList even if useGitIgnore is false and ignoreList is empty', () => {
+    const files = retrieveFilenames({
+      useGitIgnore: false,
+      ignoreList: [], // Explicitly empty the default ignore list
+      customIgnoreList: ['src/index.ts', '*.md', '.env', '*.log', 'dist/**', 'node_modules/**'],
+    });
+    // effectively only package.json and .gitignore and src/utils/helpers.ts should remain
+    const expectedFiles = [
+      '/.gitignore',
+      '/package.json',
+      '/src/utils/helpers.ts',
+    ].map(file => `${rootPath}${file}`).sort();
+    expect(files).toEqual(expectedFiles);
+  });
+
   describe('errors', () => {
     it('should throw an error if the baseDir is not a directory', () => {
       vol.reset();

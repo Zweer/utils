@@ -22,10 +22,13 @@ export function buildProgram(): Command {
     .description(packageDetails.description)
     .version(packageDetails.version)
     .option('--export-path <PATH>', 'The path of the EXPORT file', join(process.cwd(), 'docs', 'EXPORT.md'))
+    .option('--ignore-list <paths>', 'Comma-separated string of paths to ignore')
     .action((options, _command) => {
-      const { exportPath } = options;
+      const { exportPath, ignoreList } = options;
 
-      const filenames = retrieveFilenames();
+      const customIgnoreList = ignoreList ? ignoreList.split(',').map(item => item.trim()) : [];
+
+      const filenames = retrieveFilenames({ customIgnoreList });
       const tree = createFileTree(filenames);
       generateExportFile(filenames, tree, exportPath);
     });

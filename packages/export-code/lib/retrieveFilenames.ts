@@ -14,6 +14,7 @@ export function retrieveFilenames(options: Partial<RetrieveFilenamesOptions> = {
     baseDir = process.cwd(),
     ignoreList = defaultIgnoreList,
     useGitIgnore = true,
+    customIgnoreList = [],
   } = options;
 
   checkBaseDir(baseDir);
@@ -24,6 +25,7 @@ export function retrieveFilenames(options: Partial<RetrieveFilenamesOptions> = {
   }
 
   ignoreFiles.push(...ignoreList);
+  ignoreFiles.push(...customIgnoreList);
 
   const files = readdirSync(baseDir, { recursive: true, encoding: 'utf8' });
 
