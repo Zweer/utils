@@ -24,6 +24,7 @@ const defaultTemplate = `# EXPORT
 function getLanguageForExtension(extension: string): string {
   const langMap: Record<string, string> = {
     '.js': 'javascript',
+    '.mjs': 'mjs',
     '.ts': 'typescript',
     '.jsx': 'jsx',
     '.tsx': 'tsx',
@@ -36,6 +37,7 @@ function getLanguageForExtension(extension: string): string {
     '.yaml': 'yaml',
     '.sh': 'shell',
     '.py': 'python',
+    '.sql': 'sql',
   };
   return langMap[extension.toLowerCase()] || '';
 }
