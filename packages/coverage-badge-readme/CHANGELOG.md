@@ -1,3 +1,10 @@
+## @zweer/coverage-badge-readme [1.2.2](https://github.com/Zweer/utils/compare/@zweer/coverage-badge-readme@1.2.1...@zweer/coverage-badge-readme@1.2.2) (2025-07-03)
+
+
+### Bug Fixes
+
+* **export:** :white_check_mark: Fixes the missing test ([88c7d38](https://github.com/Zweer/utils/commit/88c7d38f27e4224f8dce00aad0d227f8e1a728fb))
+
 ## @zweer/coverage-badge-readme [1.2.1](https://github.com/Zweer/utils/compare/@zweer/coverage-badge-readme@1.2.0...@zweer/coverage-badge-readme@1.2.1) (2025-07-02)
 
 
