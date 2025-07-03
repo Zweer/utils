@@ -4,8 +4,7 @@ import * as fs from 'node:fs';
 import process from 'node:process';
 
 import { vol } from 'memfs';
-import { it } from 'vitest';
-import { afterEach, beforeEach, describe, expect, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { buildProgram } from '../../cli/program.js';
 
@@ -253,11 +252,11 @@ console.log(1);
 ${description}
 
 Options:
-  -V, --version              output the version number
-  --export-path <PATH>       The path of the EXPORT file (default:
-                             \"${rootPath}/docs/EXPORT.md\")
-  --ignore-list <paths>      Comma-separated string of paths to ignore
-  -h, --help                 display help for command
+  -V, --version          output the version number
+  --export-path <PATH>   The path of the EXPORT file (default:
+                         \"${rootPath}/docs/EXPORT.md\")
+  --ignore-list <paths>  Comma-separated string of paths to ignore
+  -h, --help             display help for command
 `;
 
     it.each(['--help', '-h'])('should print the help message when "%s"', (helpOption) => {

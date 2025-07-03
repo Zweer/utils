@@ -26,7 +26,7 @@ export function buildProgram(): Command {
     .action((options, _command) => {
       const { exportPath, ignoreList } = options;
 
-      const customIgnoreList = ignoreList ? ignoreList.split(',').map(item => item.trim()) : [];
+      const customIgnoreList = (ignoreList != null) ? ignoreList.split(',').map(item => item.trim()) : [];
 
       const filenames = retrieveFilenames({ customIgnoreList });
       const tree = createFileTree(filenames);

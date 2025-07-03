@@ -2,8 +2,7 @@ import type { MockInstance } from 'vitest';
 
 import type { CoverageColor } from '../../lib/types.js';
 
-import { it } from 'vitest';
-import { afterEach, beforeEach, describe, expect, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createBadge } from '../../lib/badge.js';
 

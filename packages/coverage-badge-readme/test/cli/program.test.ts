@@ -4,8 +4,7 @@ import * as fs from 'node:fs';
 import process from 'node:process';
 
 import { vol } from 'memfs';
-import { it } from 'vitest';
-import { afterEach, beforeEach, describe, expect, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { buildProgram } from '../../cli/program.js';
 
