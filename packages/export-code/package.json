@@ -47,6 +47,6 @@
     "ignore": "^7.0.5"
   },
   "devDependencies": {
-    "memfs": "^4.17.2"
+    "memfs": "^4.49.0"
   }
 }
