@@ -1,10 +1,11 @@
 import { packageExistsOnNpm, publishPackage } from './npm.js';
 import type { PublishOptions, PublishResult } from './types.js';
-import { discoverWorkspacePackages } from './workspace.js';
+import { discoverWorkspacePackages, resolveWorkspaces } from './workspace.js';
 
 export function publishDummyPackages(options: PublishOptions): PublishResult[] {
-  const { packagesDir, access, dryRun } = options;
-  const packages = discoverWorkspacePackages(packagesDir);
+  const { rootDir, access, dryRun } = options;
+  const packageDirs = resolveWorkspaces(rootDir);
+  const packages = discoverWorkspacePackages(packageDirs);
   const results: PublishResult[] = [];
 
   for (const pkg of packages) {
@@ -35,4 +36,4 @@ export function publishDummyPackages(options: PublishOptions): PublishResult[] {
 
 export { checkNpmLogin, packageExistsOnNpm, publishPackage } from './npm.js';
 export type { PublishOptions, PublishResult, WorkspacePackage } from './types.js';
-export { discoverWorkspacePackages } from './workspace.js';
+export { discoverWorkspacePackages, resolveWorkspaces } from './workspace.js';

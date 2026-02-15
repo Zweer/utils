@@ -92,7 +92,21 @@ describe('cli -> program', () => {
   });
 
   describe('action', () => {
+    const actionPkgJson = JSON.stringify({
+      name,
+      version,
+      description,
+      workspaces: ['packages/*'],
+    });
+
     it('should exit when not logged in to npm', () => {
+      vol.fromNestedJSON({
+        [rootPath]: {
+          'package.json': actionPkgJson,
+          packages: {},
+        },
+      });
+
       execSyncSpy.mockImplementation(() => {
         throw new Error('ENEEDAUTH');
       });
@@ -105,10 +119,10 @@ describe('cli -> program', () => {
       expect(exitSpy).toHaveBeenCalledWith(1);
     });
 
-    it('should publish unpublished packages', () => {
+    it('should publish unpublished packages using workspaces', () => {
       vol.fromNestedJSON({
         [rootPath]: {
-          'package.json': JSON.stringify({ name, version, description }),
+          'package.json': actionPkgJson,
           packages: {
             'pkg-a': {
               'package.json': JSON.stringify({ name: '@zweer/pkg-a', version: '0.0.0' }),
@@ -133,7 +147,7 @@ describe('cli -> program', () => {
     it('should skip packages that already exist on npm', () => {
       vol.fromNestedJSON({
         [rootPath]: {
-          'package.json': JSON.stringify({ name, version, description }),
+          'package.json': actionPkgJson,
           packages: {
             'pkg-a': {
               'package.json': JSON.stringify({ name: '@zweer/pkg-a', version: '1.0.0' }),
@@ -156,7 +170,7 @@ describe('cli -> program', () => {
     it('should skip private packages', () => {
       vol.fromNestedJSON({
         [rootPath]: {
-          'package.json': JSON.stringify({ name, version, description }),
+          'package.json': actionPkgJson,
           packages: {
             'pkg-a': {
               'package.json': JSON.stringify({
@@ -182,7 +196,7 @@ describe('cli -> program', () => {
     it('should report failed publishes', () => {
       vol.fromNestedJSON({
         [rootPath]: {
-          'package.json': JSON.stringify({ name, version, description }),
+          'package.json': actionPkgJson,
           packages: {
             'pkg-a': {
               'package.json': JSON.stringify({ name: '@zweer/pkg-a', version: '0.0.0' }),
@@ -221,12 +235,11 @@ A CLI tool to publish dummy packages to npm for OIDC provenance setup in
 monorepos
 
 Options:
-  -V, --version          output the version number
-  --packages-dir <PATH>  The path to the packages directory (default:
-                         "${rootPath}/packages")
-  --access <ACCESS>      npm publish access level (default: "public")
-  --dry-run              Perform a dry run without publishing (default: false)
-  -h, --help             display help for command
+  -V, --version      output the version number
+  --root-dir <PATH>  Root directory of the monorepo (default: "${rootPath}")
+  --access <ACCESS>  npm publish access level (default: "public")
+  --dry-run          Perform a dry run without publishing (default: false)
+  -h, --help         display help for command
 `;
 
     it.each(['--help', '-h'])('should print the help message when "%s"', (helpOption) => {

@@ -21,11 +21,11 @@ export function buildProgram(): Command {
     .name(packageDetails.name.replace('@zweer/', ''))
     .description(packageDetails.description)
     .version(packageDetails.version)
-    .option('--packages-dir <PATH>', 'The path to the packages directory', join(cwd(), 'packages'))
+    .option('--root-dir <PATH>', 'Root directory of the monorepo', join(cwd()))
     .option('--access <ACCESS>', 'npm publish access level', 'public')
     .option('--dry-run', 'Perform a dry run without publishing', false)
     .action((options) => {
-      const { packagesDir, access, dryRun } = options;
+      const { rootDir, access, dryRun } = options;
 
       const username = checkNpmLogin();
       if (!username) {
@@ -35,7 +35,7 @@ export function buildProgram(): Command {
       console.log(`✅ Logged in as: ${username}\n`);
 
       const results = publishDummyPackages({
-        packagesDir,
+        rootDir,
         access: access as 'public' | 'restricted',
         dryRun,
       });

@@ -12,7 +12,7 @@ export interface PublishResult {
 }
 
 export interface PublishOptions {
-  packagesDir: string;
+  rootDir: string;
   access: 'public' | 'restricted';
   dryRun: boolean;
 }
