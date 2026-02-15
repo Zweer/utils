@@ -87,6 +87,16 @@ describe('createTree', () => {
     expect(createFileTree(files)).toBe(expectedTree);
   });
 
+  it('should use "root" label when files share no common path prefix', () => {
+    const files = ['file1.txt', 'file2.txt'];
+
+    const result = createFileTree(files);
+
+    expect(result).toMatch(/^root\n/);
+    expect(result).toContain('file1.txt');
+    expect(result).toContain('file2.txt');
+  });
+
   it('should handle files directly in the common root directory', () => {
     const files = ['/project/src/index.js', '/project/main.js'];
 

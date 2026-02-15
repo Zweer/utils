@@ -1,6 +1,6 @@
 # @zweer/utils
 
-![Coverage Badge](https://img.shields.io/badge/coverage-99%25-brightgreen?style=flat)
+![Coverage Badge](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat)
 
 A monorepo containing a collection of useful Node.js command-line (CLI) utilities designed to streamline common development tasks.
 

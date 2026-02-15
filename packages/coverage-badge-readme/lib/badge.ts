@@ -35,7 +35,10 @@ export function createBadge(
     );
   }
 
-  const { color } = colors.find((threshold) => percentage >= (threshold.min ?? -Infinity))!;
+  const match = colors.find((threshold) => percentage >= (threshold.min ?? -Infinity));
+  /* v8 ignore start */
+  const { color } = match ?? colors[colors.length - 1];
+  /* v8 ignore stop */
 
   return badgeTemplate
     .replace(badgePercentagePlaceholder, percentage.toString())

@@ -171,6 +171,17 @@ project
 `);
   });
 
+  it('should handle a template without {NOTLAST} markers', () => {
+    const template = '{FILES}\n{FILENAME}\n{CODE}\n{FILES}';
+
+    generateExportFile(MOCK_FILENAMES, MOCK_TREE, EXPORT_PATH, template);
+
+    const output = vol.readFileSync(EXPORT_PATH, 'utf8') as string;
+
+    expect(output).toContain('/project/src/index.ts');
+    expect(output).not.toContain('NOTLAST');
+  });
+
   it('should correctly handle a single file in the list (no separator)', () => {
     const singleFilename = ['/project/README.md'];
     generateExportFile(singleFilename, 'project\n└── README.md', EXPORT_PATH);
