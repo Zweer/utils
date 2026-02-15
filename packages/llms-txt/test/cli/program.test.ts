@@ -77,6 +77,27 @@ describe('cli -> program', () => {
       repository: { type: 'git', url: 'git+https://github.com/Zweer/my-project.git' },
     });
 
+    it('should exit when project name cannot be determined', () => {
+      vol.fromNestedJSON({
+        [rootPath]: {
+          'package.json': JSON.stringify({ name: '', version, description }),
+          docs: { public: {} },
+        },
+      });
+
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {
+        throw new Error('process.exit');
+      });
+
+      expect(() => buildProgram().parse([], { from: 'user' })).toThrow('process.exit');
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        '❌ Could not determine project name. Use --project-name or set name in package.json.',
+      );
+      expect(exitSpy).toHaveBeenCalledWith(1);
+    });
+
     it('should auto-detect project meta from package.json', () => {
       vol.fromNestedJSON({
         [rootPath]: {
