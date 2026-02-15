@@ -59,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@arethetypeswrong/core": "^0.18.2",
     "@biomejs/biome": "^2.3.14",
     "@bonvoy/core": "^0.12.1",
     "@commitlint/cli": "^20.4.1",
