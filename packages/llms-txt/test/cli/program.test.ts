@@ -69,55 +69,63 @@ describe('cli -> program', () => {
     vol.reset();
   });
 
-  it('should error when required options are missing', () => {
-    expect(() => buildProgram().exitOverride().parse([], { from: 'user' })).toThrow(
-      "required option '--project-name <NAME>' not specified",
-    );
-  });
-
   describe('action', () => {
-    beforeEach(() => {
+    const actionPkgJson = JSON.stringify({
+      name,
+      version,
+      description,
+      repository: { type: 'git', url: 'git+https://github.com/Zweer/my-project.git' },
+    });
+
+    it('should auto-detect project meta from package.json', () => {
       vol.fromNestedJSON({
         [rootPath]: {
-          'package.json': JSON.stringify({ name, version, description }),
+          'package.json': actionPkgJson,
           docs: {
             'index.md': '---\ntitle: Home\ndescription: Welcome\n---\n# Home\nContent.',
-            guide: {
-              'setup.md':
-                '---\ntitle: Setup\ndescription: How to set up\n---\n# Setup\nSetup content.',
-            },
             public: {},
           },
         },
       });
-    });
 
-    it('should generate both llms.txt and llms-full.txt', () => {
-      buildProgram().parse(
-        [
-          '--project-name',
-          'Test Project',
-          '--project-description',
-          'A test project',
-          '--site-url',
-          'https://test.com',
-        ],
-        { from: 'user' },
-      );
+      buildProgram().parse([], { from: 'user' });
 
       expect(consoleLogSpy).toHaveBeenCalledWith('✅ Generated: llms.txt');
       expect(consoleLogSpy).toHaveBeenCalledWith('✅ Generated: llms-full.txt');
 
       const llmsTxt = vol.readFileSync(`${outDir}/llms.txt`, 'utf8') as string;
-      expect(llmsTxt).toContain('# Test Project');
-      expect(llmsTxt).toContain('> A test project');
-      expect(llmsTxt).toContain('[Home](https://test.com/): Welcome');
-      expect(llmsTxt).toContain('[Setup](https://test.com/guide/setup): How to set up');
+      expect(llmsTxt).toContain('# llms-txt');
+      expect(llmsTxt).toContain(`> ${description}`);
+      expect(llmsTxt).toContain('https://zweer.github.io/my-project');
+    });
 
-      const llmsFullTxt = vol.readFileSync(`${outDir}/llms-full.txt`, 'utf8') as string;
-      expect(llmsFullTxt).toContain('# Test Project');
-      expect(llmsFullTxt).toContain('# Home\nContent.');
-      expect(llmsFullTxt).toContain('# Setup\nSetup content.');
+    it('should allow CLI options to override package.json', () => {
+      vol.fromNestedJSON({
+        [rootPath]: {
+          'package.json': actionPkgJson,
+          docs: {
+            'index.md': '# Home',
+            public: {},
+          },
+        },
+      });
+
+      buildProgram().parse(
+        [
+          '--project-name',
+          'Custom Name',
+          '--project-description',
+          'Custom desc',
+          '--site-url',
+          'https://custom.com',
+        ],
+        { from: 'user' },
+      );
+
+      const llmsTxt = vol.readFileSync(`${outDir}/llms.txt`, 'utf8') as string;
+      expect(llmsTxt).toContain('# Custom Name');
+      expect(llmsTxt).toContain('> Custom desc');
+      expect(llmsTxt).toContain('https://custom.com');
     });
   });
 
@@ -139,9 +147,10 @@ directory
 
 Options:
   -V, --version                 output the version number
-  --project-name <NAME>         Project name for the llms.txt header
-  --project-description <DESC>  Project description
-  --site-url <URL>              Base URL of the site (e.g., https://example.com)
+  --project-name <NAME>         Project name (default: from package.json name)
+  --project-description <DESC>  Project description (default: from package.json)
+  --site-url <URL>              Base URL of the site (default: GitHub Pages from
+                                repo URL)
   --docs-dir <PATH>             Path to the docs directory (default:
                                 "${rootPath}/docs")
   --out-dir <PATH>              Output directory for generated files (default:
