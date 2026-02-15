@@ -1,0 +1,49 @@
+{
+  "name": "@zweer/llms-txt",
+  "version": "0.0.0",
+  "description": "A CLI tool to generate llms.txt and llms-full.txt files from a VitePress docs directory",
+  "keywords": [
+    "utility",
+    "llms",
+    "llms-txt",
+    "vitepress",
+    "documentation",
+    "ai",
+    "cli"
+  ],
+  "homepage": "https://github.com/Zweer/utils/tree/main/packages/llms-txt#readme",
+  "bugs": {
+    "url": "https://github.com/Zweer/utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zweer/utils.git",
+    "directory": "packages/llms-txt"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Zweer",
+    "email": "n.olivieriachille@gmail.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./bin": "./dist/bin.mjs",
+    "./package.json": "./package.json"
+  },
+  "bin": "./dist/bin.mjs",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@commander-js/extra-typings": "^14.0.0",
+    "commander": "^14.0.0"
+  },
+  "engines": {
+    "node": ">= 20.5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
