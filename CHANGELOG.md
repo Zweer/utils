@@ -1,5 +1,43 @@
 # Changelog
 
+
+
+## @zweer/llms-txt
+
+## [0.0.0] - 2026-02-15
+
+### ✨ Features
+
+- feat(llms-txt): :sparkles: auto-detect project meta from package.json
+- feat(llms-txt): :sparkles: add CLI to generate llms.txt from docs directory
+
+### ### test
+
+- test(publish-dummy-package, llms-txt): :white_check_mark: reach 100% coverage
+
+## @zweer/publish-dummy-package
+
+## [0.0.0] - 2026-02-15
+
+### ✨ Features
+
+- feat(publish-dummy-package): :sparkles: auto-login to npm when not authenticated
+- feat(publish-dummy-package): :sparkles: auto-detect workspaces from package.json
+- feat(publish-dummy-package): :sparkles: add CLI to publish dummy packages for OIDC setup
+
+## @zweer/llms-txt
+
+## [0.0.0] - 2026-02-15
+
+### ✨ Features
+
+- feat(llms-txt): :sparkles: auto-detect project meta from package.json
+- feat(llms-txt): :sparkles: add CLI to generate llms.txt from docs directory
+
+### ### test
+
+- test(publish-dummy-package, llms-txt): :white_check_mark: reach 100% coverage
+
 ## 1.0.0 (2025-06-10)
 
 

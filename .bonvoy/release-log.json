@@ -1,0 +1,21 @@
+{
+  "startedAt": "2026-02-15T21:19:21.419Z",
+  "config": {
+    "tagFormat": "{name}@{version}",
+    "rootPath": "/home/runner/work/utils/utils"
+  },
+  "packages": [
+    {
+      "name": "@zweer/llms-txt",
+      "from": "0.0.0",
+      "to": "0.1.0"
+    },
+    {
+      "name": "@zweer/publish-dummy-package",
+      "from": "0.0.0",
+      "to": "0.1.0"
+    }
+  ],
+  "actions": [],
+  "status": "in-progress"
+}
