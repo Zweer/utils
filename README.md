@@ -14,6 +14,8 @@ This repository currently hosts the following packages:
 | :--- | :--- | :--- |
 | [`coverage-badge-readme`](./packages/coverage-badge-readme) | [![npm version](https://img.shields.io/npm/v/@zweer/coverage-badge-readme.svg?style=flat)](https://www.npmjs.com/package/@zweer/coverage-badge-readme) | A CLI tool to automatically update a test coverage badge in your README.md. |
 | [`export-code`](./packages/export-code) | [![npm version](https://img.shields.io/npm/v/@zweer/export-code.svg?style=flat)](https://www.npmjs.com/package/@zweer/export-code) | A CLI tool to export your entire codebase into a single file, perfect for AI prompts. |
+| [`llms-txt`](./packages/llms-txt) | [![npm version](https://img.shields.io/npm/v/@zweer/llms-txt.svg?style=flat)](https://www.npmjs.com/package/@zweer/llms-txt) | A CLI tool to generate `llms.txt` and `llms-full.txt` files from a docs directory. |
+| [`publish-dummy-package`](./packages/publish-dummy-package) | [![npm version](https://img.shields.io/npm/v/@zweer/publish-dummy-package.svg?style=flat)](https://www.npmjs.com/package/@zweer/publish-dummy-package) | A CLI tool to publish dummy packages to npm for OIDC provenance setup in monorepos. |
 
 ## 哲学 (Philosophy)
 

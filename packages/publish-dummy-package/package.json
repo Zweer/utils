@@ -1,0 +1,48 @@
+{
+  "name": "@zweer/publish-dummy-package",
+  "version": "0.0.0",
+  "description": "A CLI tool to publish dummy packages to npm for OIDC provenance setup in monorepos",
+  "keywords": [
+    "utility",
+    "npm",
+    "publish",
+    "oidc",
+    "monorepo",
+    "cli"
+  ],
+  "homepage": "https://github.com/Zweer/utils/tree/main/packages/publish-dummy-package#readme",
+  "bugs": {
+    "url": "https://github.com/Zweer/utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zweer/utils.git",
+    "directory": "packages/publish-dummy-package"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Zweer",
+    "email": "n.olivieriachille@gmail.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./bin": "./dist/bin.mjs",
+    "./package.json": "./package.json"
+  },
+  "bin": "./dist/bin.mjs",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@commander-js/extra-typings": "^14.0.0",
+    "commander": "^14.0.0"
+  },
+  "engines": {
+    "node": ">= 20.5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

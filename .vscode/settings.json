@@ -1,3 +1,8 @@
 {
-  "conventionalCommits.scopes": ["coverage-badge-readme", "export-code"]
+  "conventionalCommits.scopes": [
+    "coverage-badge-readme",
+    "export-code",
+    "llms-txt",
+    "publish-dummy-package"
+  ]
 }
