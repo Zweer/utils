@@ -34,6 +34,6 @@ export function publishDummyPackages(options: PublishOptions): PublishResult[] {
   return results;
 }
 
-export { checkNpmLogin, packageExistsOnNpm, publishPackage } from './npm.js';
+export { checkNpmLogin, ensureNpmLogin, packageExistsOnNpm, publishPackage } from './npm.js';
 export type { PublishOptions, PublishResult, WorkspacePackage } from './types.js';
 export { discoverWorkspacePackages, resolveWorkspaces } from './workspace.js';

@@ -4,7 +4,7 @@ import { cwd } from 'node:process';
 
 import { Command } from '@commander-js/extra-typings';
 
-import { checkNpmLogin, publishDummyPackages } from '../lib/index.js';
+import { ensureNpmLogin, publishDummyPackages } from '../lib/index.js';
 
 interface Package {
   name: string;
@@ -27,11 +27,7 @@ export function buildProgram(): Command {
     .action((options) => {
       const { rootDir, access, dryRun } = options;
 
-      const username = checkNpmLogin();
-      if (!username) {
-        console.error('❌ Not logged in to npm. Run `npm login` first.');
-        process.exit(1);
-      }
+      const username = ensureNpmLogin();
       console.log(`✅ Logged in as: ${username}\n`);
 
       const results = publishDummyPackages({

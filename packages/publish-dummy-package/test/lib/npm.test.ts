@@ -3,7 +3,12 @@ import { execSync } from 'node:child_process';
 import type { MockInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { checkNpmLogin, packageExistsOnNpm, publishPackage } from '../../lib/npm.js';
+import {
+  checkNpmLogin,
+  ensureNpmLogin,
+  packageExistsOnNpm,
+  publishPackage,
+} from '../../lib/npm.js';
 
 vi.mock('node:child_process', () => ({
   execSync: vi.fn(),
@@ -37,6 +42,41 @@ describe('lib -> npm', () => {
       });
 
       expect(checkNpmLogin()).toBeNull();
+    });
+  });
+
+  describe('ensureNpmLogin', () => {
+    it('should return username when already logged in', () => {
+      execSyncSpy.mockReturnValue('zweer\n');
+
+      expect(ensureNpmLogin()).toBe('zweer');
+    });
+
+    it('should login and return username when not logged in', () => {
+      let loginCalled = false;
+      execSyncSpy.mockImplementation((cmd: string) => {
+        if (cmd === 'npm whoami') {
+          if (!loginCalled) throw new Error('ENEEDAUTH');
+          return 'zweer\n';
+        }
+        if (cmd === 'npm login') {
+          loginCalled = true;
+          return '';
+        }
+        return '';
+      });
+
+      expect(ensureNpmLogin()).toBe('zweer');
+      expect(execSyncSpy).toHaveBeenCalledWith('npm login', { stdio: 'inherit' });
+    });
+
+    it('should throw when login fails', () => {
+      execSyncSpy.mockImplementation((cmd: string) => {
+        if (cmd === 'npm whoami') throw new Error('ENEEDAUTH');
+        return '';
+      });
+
+      expect(() => ensureNpmLogin()).toThrow('npm login failed. Please try again.');
     });
   });
 

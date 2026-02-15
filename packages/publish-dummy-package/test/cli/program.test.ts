@@ -52,8 +52,6 @@ describe('cli -> program', () => {
   let stdoutSpy: MockInstance<typeof process.stdout.write>;
   let stderrSpy: MockInstance<typeof process.stderr.write>;
   let consoleLogSpy: MockInstance<typeof console.log>;
-  let consoleErrorSpy: MockInstance<typeof console.error>;
-  let exitSpy: MockInstance<typeof process.exit>;
   let execSyncSpy: MockInstance<typeof childProcess.execSync>;
 
   const name = '@zweer/publish-dummy-package';
@@ -70,8 +68,8 @@ describe('cli -> program', () => {
     stdoutSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
     stderrSpy = vi.spyOn(process.stderr, 'write').mockImplementation(() => true);
     consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(process, 'exit').mockImplementation(() => {
       throw new Error('process.exit');
     });
 
@@ -99,7 +97,7 @@ describe('cli -> program', () => {
       workspaces: ['packages/*'],
     });
 
-    it('should exit when not logged in to npm', () => {
+    it('should login automatically when not logged in to npm', () => {
       vol.fromNestedJSON({
         [rootPath]: {
           'package.json': actionPkgJson,
@@ -107,16 +105,23 @@ describe('cli -> program', () => {
         },
       });
 
-      execSyncSpy.mockImplementation(() => {
-        throw new Error('ENEEDAUTH');
+      let loginCalled = false;
+      execSyncSpy.mockImplementation((cmd: string) => {
+        if (cmd === 'npm whoami') {
+          if (!loginCalled) throw new Error('ENEEDAUTH');
+          return 'zweer';
+        }
+        if (cmd === 'npm login') {
+          loginCalled = true;
+          return '';
+        }
+        return '';
       });
 
-      expect(() => buildProgram().parse([], { from: 'user' })).toThrow('process.exit');
+      buildProgram().parse([], { from: 'user' });
 
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '❌ Not logged in to npm. Run `npm login` first.',
-      );
-      expect(exitSpy).toHaveBeenCalledWith(1);
+      expect(consoleLogSpy).toHaveBeenCalledWith('🔑 Not logged in to npm. Starting login...\n');
+      expect(consoleLogSpy).toHaveBeenCalledWith('✅ Logged in as: zweer\n');
     });
 
     it('should publish unpublished packages using workspaces', () => {
