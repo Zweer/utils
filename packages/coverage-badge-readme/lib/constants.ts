@@ -1,5 +1,4 @@
 import type { CoverageColor } from './types.js';
-
 import { Color } from './types.js';
 
 export const defaultCoverageColors: CoverageColor[] = [
@@ -13,4 +12,4 @@ export const defaultCoverageColors: CoverageColor[] = [
 
 export const badgePercentagePlaceholder = '{PERCENTAGE}';
 export const badgeColorPlaceholder = '{COLOR}';
-export const defaultBadgeTemplate = `![Coverage Badge](https://img.shields.io/badge/coverage-${badgePercentagePlaceholder}%25-${badgeColorPlaceholder}?style=flat)`;
+export const defaultBadgeTemplate: string = `![Coverage Badge](https://img.shields.io/badge/coverage-${badgePercentagePlaceholder}%25-${badgeColorPlaceholder}?style=flat)`;

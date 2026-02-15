@@ -1,8 +1,7 @@
-import type { MockInstance } from 'vitest';
-
 import * as fs from 'node:fs';
 
 import { vol } from 'memfs';
+import type { MockInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { modifyReadme } from '../../lib/readme.js';
@@ -28,7 +27,8 @@ describe('lib -> readme', () => {
   let readFileSyncSpy: MockInstance<typeof fs.readFileSync>;
   let writeFileSyncSpy: MockInstance<typeof fs.writeFileSync>;
 
-  const readmeContent = '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat)\nfoo';
+  const readmeContent =
+    '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat)\nfoo';
 
   beforeEach(() => {
     consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
@@ -69,7 +69,10 @@ describe('lib -> readme', () => {
 
       expect(existsSyncSpy).toHaveBeenCalledWith(readmePath);
       expect(readFileSyncSpy).toHaveBeenCalledWith(readmePath, 'utf8');
-      expect(writeFileSyncSpy).toHaveBeenCalledWith(readmePath, '[badge]\n![Coverage Badge](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat)\nfoo');
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        readmePath,
+        '[badge]\n![Coverage Badge](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat)\nfoo',
+      );
 
       expect(consoleLogSpy).toHaveBeenCalledWith('Badge added to the readme file');
       expect(consoleWarnSpy).not.toHaveBeenCalled();
@@ -91,7 +94,9 @@ describe('lib -> readme', () => {
       expect(writeFileSyncSpy).toHaveBeenCalledWith(readmePath, badReadmeContent);
 
       expect(consoleLogSpy).toHaveBeenCalledWith('Badge added to the readme file');
-      expect(consoleWarnSpy).toHaveBeenCalledWith('It looks like the readme file doesn\'t have any coverage badge. Did you initialize it?');
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        "It looks like the readme file doesn't have any coverage badge. Did you initialize it?",
+      );
       expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
 
@@ -107,7 +112,9 @@ describe('lib -> readme', () => {
       expect(writeFileSyncSpy).toHaveBeenCalledWith(readmePath, readmeContent);
 
       expect(consoleLogSpy).toHaveBeenCalledWith('Badge added to the readme file');
-      expect(consoleWarnSpy).toHaveBeenCalledWith('It looks like the readme file doesn\'t have any coverage badge. Did you initialize it?');
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        "It looks like the readme file doesn't have any coverage badge. Did you initialize it?",
+      );
       expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
   });

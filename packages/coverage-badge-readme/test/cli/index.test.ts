@@ -1,9 +1,8 @@
-import type { MockInstance } from 'vitest';
-
 import * as fs from 'node:fs';
 import process from 'node:process';
 
 import { vol } from 'memfs';
+import type { MockInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const rootPath = vi.hoisted(() => '/fake/root/path');
@@ -31,7 +30,9 @@ vi.mock(import('node:path'), async (importOriginal) => {
         args[0] = args[0].replace(realRootPath1, rootPath);
       }
 
-      const realRootPath2 = path.dirname(path.dirname(path.dirname(path.dirname(import.meta.dirname))));
+      const realRootPath2 = path.dirname(
+        path.dirname(path.dirname(path.dirname(import.meta.dirname))),
+      );
       if (args[0].startsWith(realRootPath2)) {
         args[0] = args[0].replace(realRootPath2, rootPath);
       }
@@ -55,8 +56,10 @@ describe('cli', () => {
   const version = '1.2.3';
   const description = 'A small utility to add your coverage badge to the README file';
 
-  const readmeContent = '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat)\nfoo';
-  const expectedReadmeContent = '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-40%25-red?style=flat)\nfoo';
+  const readmeContent =
+    '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat)\nfoo';
+  const expectedReadmeContent =
+    '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-40%25-red?style=flat)\nfoo';
 
   const branchesPct = 10;
   const branchesTruePct = 20;

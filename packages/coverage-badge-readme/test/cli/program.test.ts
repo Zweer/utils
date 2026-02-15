@@ -1,9 +1,8 @@
-import type { MockInstance } from 'vitest';
-
 import * as fs from 'node:fs';
 import process from 'node:process';
 
 import { vol } from 'memfs';
+import type { MockInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { buildProgram } from '../../cli/program.js';
@@ -33,7 +32,9 @@ vi.mock(import('node:path'), async (importOriginal) => {
         args[0] = args[0].replace(realRootPath1, rootPath);
       }
 
-      const realRootPath2 = path.dirname(path.dirname(path.dirname(path.dirname(import.meta.dirname))));
+      const realRootPath2 = path.dirname(
+        path.dirname(path.dirname(path.dirname(import.meta.dirname))),
+      );
       if (args[0].startsWith(realRootPath2)) {
         args[0] = args[0].replace(realRootPath2, rootPath);
       }
@@ -77,11 +78,12 @@ describe('cli -> program', () => {
   });
 
   it('should print the help message when unknown option', () => {
-    expect(() => buildProgram().exitOverride().parse(['--unknown'], { from: 'user' }))
-      .toThrow('error: unknown option \'--unknown\'');
+    expect(() => buildProgram().exitOverride().parse(['--unknown'], { from: 'user' })).toThrow(
+      "error: unknown option '--unknown'",
+    );
 
     expect(stdoutSpy).not.toHaveBeenCalled();
-    expect(stderrSpy).toHaveBeenCalledWith('error: unknown option \'--unknown\'\n');
+    expect(stderrSpy).toHaveBeenCalledWith("error: unknown option '--unknown'\n");
 
     expect(existsSyncSpy).not.toHaveBeenCalled();
     expect(readFileSyncSpy).toHaveBeenCalledWith(packagePath, 'utf8');
@@ -89,8 +91,10 @@ describe('cli -> program', () => {
   });
 
   describe('action', () => {
-    const readmeContent = '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat)\nfoo';
-    const expectedReadmeContent = '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-40%25-red?style=flat)\nfoo';
+    const readmeContent =
+      '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat)\nfoo';
+    const expectedReadmeContent =
+      '# title\n![Coverage Badge](https://img.shields.io/badge/coverage-40%25-red?style=flat)\nfoo';
 
     const branchesPct = 10;
     const branchesTruePct = 20;
@@ -159,8 +163,9 @@ describe('cli -> program', () => {
 
   describe('version', () => {
     it.each(['--version', '-V'])('should print the version when "%s"', (versionOption) => {
-      expect(() => buildProgram().exitOverride().parse([versionOption], { from: 'user' }))
-        .toThrow(version);
+      expect(() => buildProgram().exitOverride().parse([versionOption], { from: 'user' })).toThrow(
+        version,
+      );
 
       expect(stdoutSpy).toHaveBeenCalledWith(`${version}\n`);
       expect(stderrSpy).not.toHaveBeenCalled();
@@ -179,15 +184,16 @@ ${description}
 Options:
   -V, --version           output the version number
   --readme-path <PATH>    The path of the README file (default:
-                          \"/fake/root/path/README.md\")
+                          "/fake/root/path/README.md")
   --coverage-path <PATH>  The path of the coverage-summary.json file (default:
-                          \"/fake/root/path/coverage/coverage-summary.json\")
+                          "/fake/root/path/coverage/coverage-summary.json")
   -h, --help              display help for command
 `;
 
     it.each(['--help', '-h'])('should print the help message when "%s"', (helpOption) => {
-      expect(() => buildProgram().exitOverride().parse([helpOption], { from: 'user' }))
-        .toThrow('(outputHelp)');
+      expect(() => buildProgram().exitOverride().parse([helpOption], { from: 'user' })).toThrow(
+        '(outputHelp)',
+      );
 
       expect(stdoutSpy).toHaveBeenCalledWith(help);
       expect(stderrSpy).not.toHaveBeenCalled();

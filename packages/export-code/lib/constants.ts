@@ -1,4 +1,4 @@
-export const defaultIgnoreList = [
+export const defaultIgnoreList: string[] = [
   '.git',
   '.husky/_',
   '*.svg',

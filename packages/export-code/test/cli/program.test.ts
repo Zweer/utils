@@ -1,9 +1,8 @@
-import type { MockInstance } from 'vitest';
-
 import * as fs from 'node:fs';
 import process from 'node:process';
 
 import { vol } from 'memfs';
+import type { MockInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { buildProgram } from '../../cli/program.js';
@@ -30,7 +29,9 @@ vi.mock(import('node:path'), async (importOriginal) => {
         args[0] = args[0].replace(realRootPath1, rootPath);
       }
 
-      const realRootPath2 = path.dirname(path.dirname(path.dirname(path.dirname(import.meta.dirname))));
+      const realRootPath2 = path.dirname(
+        path.dirname(path.dirname(path.dirname(import.meta.dirname))),
+      );
       if (args[0].startsWith(realRootPath2)) {
         args[0] = args[0].replace(realRootPath2, rootPath);
       }
@@ -77,11 +78,12 @@ describe('cli -> program', () => {
   });
 
   it('should print the help message when unknown option', () => {
-    expect(() => buildProgram().exitOverride().parse(['--unknown'], { from: 'user' }))
-      .toThrow('error: unknown option \'--unknown\'');
+    expect(() => buildProgram().exitOverride().parse(['--unknown'], { from: 'user' })).toThrow(
+      "error: unknown option '--unknown'",
+    );
 
     expect(stdoutSpy).not.toHaveBeenCalled();
-    expect(stderrSpy).toHaveBeenCalledWith('error: unknown option \'--unknown\'\n');
+    expect(stderrSpy).toHaveBeenCalledWith("error: unknown option '--unknown'\n");
 
     expect(existsSyncSpy).not.toHaveBeenCalled();
     expect(readFileSyncSpy).toHaveBeenCalledWith(`${rootPath}/${packagePath}`, 'utf8');
@@ -169,15 +171,15 @@ console.log(1);
         vol.fromNestedJSON({
           [rootPath]: {
             [packagePath]: JSON.stringify({ name, version, description }),
-            'src': {
+            src: {
               'index.ts': 'console.log("hello index");',
               'moduleA.ts': 'export const A = "A";',
               'moduleB.js': 'module.exports = "B";',
-              'generated': {
+              generated: {
                 'types.ts': 'export type MyType = string;',
               },
             },
-            'tests': {
+            tests: {
               'index.test.ts': '// test for index',
               'moduleA.test.ts': '// test for moduleA',
             },
@@ -190,7 +192,9 @@ console.log(1);
       });
 
       it('should ignore files specified in --ignore-list', () => {
-        buildProgram().parse(['--ignore-list', 'src/generated/**,*.test.ts,README.md'], { from: 'user' });
+        buildProgram().parse(['--ignore-list', 'src/generated/**,*.test.ts,README.md'], {
+          from: 'user',
+        });
         const output = vol.readFileSync(exportPath, 'utf8') as string;
 
         expect(output).not.toContain('src/generated/types.ts');
@@ -212,7 +216,9 @@ console.log(1);
       });
 
       it('should correctly parse comma-separated values with spaces', () => {
-        buildProgram().parse(['--ignore-list', ' src/generated/** , *.test.ts , README.md '], { from: 'user' });
+        buildProgram().parse(['--ignore-list', ' src/generated/** , *.test.ts , README.md '], {
+          from: 'user',
+        });
         const output = vol.readFileSync(exportPath, 'utf8') as string;
 
         expect(output).not.toContain('src/generated/types.ts');
@@ -234,8 +240,9 @@ console.log(1);
 
   describe('version', () => {
     it.each(['--version', '-V'])('should print the version when "%s"', (versionOption) => {
-      expect(() => buildProgram().exitOverride().parse([versionOption], { from: 'user' }))
-        .toThrow(version);
+      expect(() => buildProgram().exitOverride().parse([versionOption], { from: 'user' })).toThrow(
+        version,
+      );
 
       expect(stdoutSpy).toHaveBeenCalledWith(`${version}\n`);
       expect(stderrSpy).not.toHaveBeenCalled();
@@ -254,14 +261,15 @@ ${description}
 Options:
   -V, --version          output the version number
   --export-path <PATH>   The path of the EXPORT file (default:
-                         \"${rootPath}/docs/EXPORT.md\")
+                         "${rootPath}/docs/EXPORT.md")
   --ignore-list <paths>  Comma-separated string of paths to ignore
   -h, --help             display help for command
 `;
 
     it.each(['--help', '-h'])('should print the help message when "%s"', (helpOption) => {
-      expect(() => buildProgram().exitOverride().parse([helpOption], { from: 'user' }))
-        .toThrow('(outputHelp)');
+      expect(() => buildProgram().exitOverride().parse([helpOption], { from: 'user' })).toThrow(
+        '(outputHelp)',
+      );
 
       expect(stdoutSpy).toHaveBeenCalledWith(help);
       expect(stderrSpy).not.toHaveBeenCalled();

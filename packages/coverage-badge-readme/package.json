@@ -1,53 +1,48 @@
 {
   "name": "@zweer/coverage-badge-readme",
-  "type": "module",
   "version": "1.2.2",
-  "description": "A small utility to apply your coverage badge on the README file",
-  "author": "Zweer <n.olivieriachille@gmail.com>",
-  "license": "MIT",
+  "description": "A CLI tool to automatically update a test coverage badge in your README.md",
+  "keywords": [
+    "utility",
+    "coverage",
+    "badge",
+    "readme",
+    "cli"
+  ],
   "homepage": "https://github.com/Zweer/utils/tree/main/packages/coverage-badge-readme#readme",
+  "bugs": {
+    "url": "https://github.com/Zweer/utils/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Zweer/utils.git",
     "directory": "packages/coverage-badge-readme"
   },
-  "bugs": {
-    "url": "https://github.com/Zweer/utils/issues"
+  "license": "MIT",
+  "author": {
+    "name": "Zweer",
+    "email": "n.olivieriachille@gmail.com"
   },
-  "keywords": [
-    "utility",
-    "coverage",
-    "badge",
-    "readme"
-  ],
+  "type": "module",
   "exports": {
-    "./cli": "./cli/program.js",
-    "./badge": "./lib/badge.js",
-    "./coverage": "./lib/coverage.js",
-    "./readme": "./lib/readme.js"
+    ".": "./dist/index.mjs",
+    "./bin": "./dist/bin.mjs",
+    "./package.json": "./package.json"
   },
-  "bin": "./cli/index.js",
+  "bin": "./dist/bin.mjs",
   "files": [
-    "cli/**/*.{d.ts,js}",
-    "lib/**/*.{d.ts,js}"
+    "dist"
   ],
-  "engines": {
-    "node": ">= 20"
-  },
-  "scripts": {
-    "lint:engines": "ls-engines",
-    "lint:publish": "publint --strict"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "dependencies": {
     "@commander-js/extra-typings": "^14.0.0",
     "commander": "^14.0.0",
     "ignore": "^7.0.5"
   },
-  "devDependencies": {
-    "memfs": "^4.17.2"
+  "engines": {
+    "node": ">= 20.5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

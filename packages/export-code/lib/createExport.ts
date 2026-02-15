@@ -52,7 +52,7 @@ export function generateExportFile(
   const loopMatch = template.match(fileLoopRegex);
 
   if (!loopMatch || !loopMatch[1]) {
-    console.error('Template doesn\'t contain {FILES} section');
+    console.error("Template doesn't contain {FILES} section");
     throw new Error('InvalidTemplate');
   }
   const fileTemplate = loopMatch[1];

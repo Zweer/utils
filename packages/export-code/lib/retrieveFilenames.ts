@@ -1,5 +1,3 @@
-import type { RetrieveFilenamesOptions } from './types.js';
-
 import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import process from 'node:process';
@@ -7,6 +5,7 @@ import process from 'node:process';
 import ignore from 'ignore';
 
 import { defaultIgnoreList } from './constants.js';
+import type { RetrieveFilenamesOptions } from './types.js';
 import { checkBaseDir, readGitIgnore } from './utils.js';
 
 export function retrieveFilenames(options: Partial<RetrieveFilenamesOptions> = {}): string[] {
@@ -32,8 +31,8 @@ export function retrieveFilenames(options: Partial<RetrieveFilenamesOptions> = {
   const files2export = ignore()
     .add(ignoreFiles)
     .filter(files)
-    .filter(file => !statSync(file).isDirectory())
+    .filter((file) => !statSync(file).isDirectory())
     .sort();
 
-  return files2export.map(file => join(baseDir, file));
+  return files2export.map((file) => join(baseDir, file));
 }

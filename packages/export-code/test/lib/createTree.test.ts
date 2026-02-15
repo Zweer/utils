@@ -88,10 +88,7 @@ describe('createTree', () => {
   });
 
   it('should handle files directly in the common root directory', () => {
-    const files = [
-      '/project/src/index.js',
-      '/project/main.js',
-    ];
+    const files = ['/project/src/index.js', '/project/main.js'];
 
     const expectedTree = `project
 ├── main.js

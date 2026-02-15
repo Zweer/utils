@@ -1,6 +1,3 @@
 {
-  "conventionalCommits.scopes": [
-    "coverage",
-    "export"
-  ]
+  "conventionalCommits.scopes": ["coverage-badge-readme", "export-code"]
 }

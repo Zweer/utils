@@ -1,5 +1,4 @@
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-lint-staged --concurrent false
-git update-index --again
+npx --no -- commitlint --edit $1

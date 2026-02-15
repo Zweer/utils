@@ -4,16 +4,16 @@ interface FileTree {
   [key: string]: FileTree | null;
 }
 
-export function createFileTree(filenames: string[]) {
+export function createFileTree(filenames: string[]): string {
   if (filenames.length === 0) {
     return '';
   }
 
-  const normalizedFilenames = filenames.map(filename => filename.replace(/\\/g, '/'));
+  const normalizedFilenames = filenames.map((filename) => filename.replace(/\\/g, '/'));
 
   // 1. Find the common base path to determine the root of the tree.
   // We split all paths into components and find the common prefix.
-  const pathComponents = normalizedFilenames.map(p => p.split('/'));
+  const pathComponents = normalizedFilenames.map((p) => p.split('/'));
   const commonBase = [...pathComponents[0]];
 
   if (pathComponents.length === 1) {

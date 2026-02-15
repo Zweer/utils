@@ -1,52 +1,48 @@
 {
   "name": "@zweer/export-code",
-  "type": "module",
   "version": "1.3.1",
-  "description": "A small utility to export all the repo code into a single md file",
-  "author": "Zweer <n.olivieriachille@gmail.com>",
-  "license": "MIT",
+  "description": "A CLI tool to export your entire codebase into a single file, perfect for AI prompts",
+  "keywords": [
+    "utility",
+    "export",
+    "code",
+    "cli",
+    "ai"
+  ],
   "homepage": "https://github.com/Zweer/utils/tree/main/packages/export-code#readme",
+  "bugs": {
+    "url": "https://github.com/Zweer/utils/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Zweer/utils.git",
     "directory": "packages/export-code"
   },
-  "bugs": {
-    "url": "https://github.com/Zweer/utils/issues"
+  "license": "MIT",
+  "author": {
+    "name": "Zweer",
+    "email": "n.olivieriachille@gmail.com"
   },
-  "keywords": [
-    "utility",
-    "export",
-    "code"
-  ],
+  "type": "module",
   "exports": {
-    "./cli": "./cli/program.js",
-    "./createExport": "./lib/createExport.js",
-    "./createTree": "./lib/createTree.js",
-    "./retrieveFilenames": "./lib/retrieveFilenames.js"
+    ".": "./dist/index.mjs",
+    "./bin": "./dist/bin.mjs",
+    "./package.json": "./package.json"
   },
-  "bin": "./cli/index.js",
+  "bin": "./dist/bin.mjs",
   "files": [
-    "cli/**/*.{d.ts,js}",
-    "lib/**/*.{d.ts,js}"
+    "dist"
   ],
-  "engines": {
-    "node": ">= 20"
-  },
-  "scripts": {
-    "lint:engines": "ls-engines",
-    "lint:publish": "publint --strict"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "dependencies": {
     "@commander-js/extra-typings": "^14.0.0",
     "commander": "^14.0.0",
     "ignore": "^7.0.5"
   },
-  "devDependencies": {
-    "memfs": "^4.17.2"
+  "engines": {
+    "node": ">= 20.5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

@@ -1,8 +1,7 @@
-import type { MockInstance } from 'vitest';
-
 import * as fs from 'node:fs';
 
 import { vol } from 'memfs';
+import type { MockInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { extractCoverage } from '../../lib/coverage.js';
@@ -41,7 +40,9 @@ describe('lib -> coverage', () => {
   });
 
   it('should fail if no coverage file is found', () => {
-    expect(() => extractCoverage(coveragePath, CoverageMetric.BRANCHES)).toThrow(new Error('FileNotFound'));
+    expect(() => extractCoverage(coveragePath, CoverageMetric.BRANCHES)).toThrow(
+      new Error('FileNotFound'),
+    );
 
     expect(existsSyncSpy).toHaveBeenCalledWith(coveragePath);
     expect(readFileSyncSpy).not.toHaveBeenCalled();
@@ -112,12 +113,16 @@ describe('lib -> coverage', () => {
 
     describe('errors', () => {
       it('should fail when called with the wrong argument', () => {
-        expect(() => extractCoverage(coveragePath, 'foo' as CoverageMetric)).toThrow(new Error('CoverageMetric'));
+        expect(() => extractCoverage(coveragePath, 'foo' as CoverageMetric)).toThrow(
+          new Error('CoverageMetric'),
+        );
 
         expect(existsSyncSpy).not.toHaveBeenCalled();
         expect(readFileSyncSpy).not.toHaveBeenCalled();
         expect(consoleLogSpy).not.toHaveBeenCalled();
-        expect(consoleErrorSpy).toHaveBeenCalledWith('"foo" has an invalid value. It must be one of the CoverageMetrics');
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+          '"foo" has an invalid value. It must be one of the CoverageMetrics',
+        );
       });
 
       it('should fail when called with the wrong coverage file', () => {
@@ -125,12 +130,18 @@ describe('lib -> coverage', () => {
           [coveragePath]: 'aaa',
         });
 
-        expect(() => extractCoverage(coveragePath, CoverageMetric.BRANCHES)).toThrow(new Error('InvalidCoverageFile'));
+        expect(() => extractCoverage(coveragePath, CoverageMetric.BRANCHES)).toThrow(
+          new Error('InvalidCoverageFile'),
+        );
 
         expect(existsSyncSpy).toHaveBeenCalledWith(coveragePath);
         expect(readFileSyncSpy).toHaveBeenCalledWith(coveragePath, 'utf8');
         expect(consoleLogSpy).not.toHaveBeenCalled();
-        expect(consoleErrorSpy).toHaveBeenCalledWith('Invalid coverage file at', coveragePath, 'did you specify the "json-summary" reporter?');
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+          'Invalid coverage file at',
+          coveragePath,
+          'did you specify the "json-summary" reporter?',
+        );
       });
 
       it.each([
@@ -144,12 +155,18 @@ describe('lib -> coverage', () => {
           [coveragePath]: JSON.stringify(coverageJson),
         });
 
-        expect(() => extractCoverage(coveragePath, CoverageMetric.BRANCHES)).toThrow(new Error('InvalidCoverageJsonFile'));
+        expect(() => extractCoverage(coveragePath, CoverageMetric.BRANCHES)).toThrow(
+          new Error('InvalidCoverageJsonFile'),
+        );
 
         expect(existsSyncSpy).toHaveBeenCalledWith(coveragePath);
         expect(readFileSyncSpy).toHaveBeenCalledWith(coveragePath, 'utf8');
         expect(consoleLogSpy).not.toHaveBeenCalled();
-        expect(consoleErrorSpy).toHaveBeenCalledWith('Invalid coverage json file at', coveragePath, 'did you specify the "json-summary" reporter?');
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+          'Invalid coverage json file at',
+          coveragePath,
+          'did you specify the "json-summary" reporter?',
+        );
       });
     });
   });

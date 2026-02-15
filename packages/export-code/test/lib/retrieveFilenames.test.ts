@@ -23,13 +23,13 @@ describe('retrieveFilenames', () => {
         'package.json': '{}',
         'README.md': 'Project Readme',
         '.gitignore': ['node_modules', 'dist', '.env', '*.log'].join('\n'),
-        'src': {
+        src: {
           'index.ts': 'console.log("hello")',
-          'utils': {
+          utils: {
             'helpers.ts': 'export const a = 1;',
           },
         },
-        'dist': {
+        dist: {
           'bundle.js': '...',
         },
         'node_modules/some-lib/index.js': '...',
@@ -55,7 +55,9 @@ describe('retrieveFilenames', () => {
       '/package.json',
       '/src/index.ts',
       '/src/utils/helpers.ts',
-    ].map(file => `${rootPath}${file}`).sort();
+    ]
+      .map((file) => `${rootPath}${file}`)
+      .sort();
 
     expect(files).toEqual(expectedFiles);
   });
@@ -73,7 +75,9 @@ describe('retrieveFilenames', () => {
       '/src/index.ts',
       '/src/utils/helpers.ts',
       '/test.log',
-    ].map(file => `${rootPath}${file}`).sort();
+    ]
+      .map((file) => `${rootPath}${file}`)
+      .sort();
 
     expect(files).toEqual(expectedFiles);
   });
@@ -83,7 +87,9 @@ describe('retrieveFilenames', () => {
       ignoreList: ['README.md', '**/*.ts'],
     });
 
-    const expectedFiles = ['/.gitignore', '/package.json'].map(file => `${rootPath}${file}`).sort();
+    const expectedFiles = ['/.gitignore', '/package.json']
+      .map((file) => `${rootPath}${file}`)
+      .sort();
 
     expect(files).toEqual(expectedFiles);
   });
@@ -102,7 +108,9 @@ describe('retrieveFilenames', () => {
       '/src/index.ts',
       '/src/utils/helpers.ts',
       '/test.log',
-    ].map(file => `${rootPath}${file}`).sort();
+    ]
+      .map((file) => `${rootPath}${file}`)
+      .sort();
 
     expect(files).toEqual(expectedFiles);
   });
@@ -127,11 +135,9 @@ describe('retrieveFilenames', () => {
     const files = retrieveFilenames({
       customIgnoreList: ['src/index.ts', 'README.md'],
     });
-    const expectedFiles = [
-      '/.gitignore',
-      '/package.json',
-      '/src/utils/helpers.ts',
-    ].map(file => `${rootPath}${file}`).sort();
+    const expectedFiles = ['/.gitignore', '/package.json', '/src/utils/helpers.ts']
+      .map((file) => `${rootPath}${file}`)
+      .sort();
     expect(files).toEqual(expectedFiles);
   });
 
@@ -139,7 +145,9 @@ describe('retrieveFilenames', () => {
     const files = retrieveFilenames({
       customIgnoreList: ['src/**', '*.md'],
     });
-    const expectedFiles = ['/.gitignore', '/package.json'].map(file => `${rootPath}${file}`).sort();
+    const expectedFiles = ['/.gitignore', '/package.json']
+      .map((file) => `${rootPath}${file}`)
+      .sort();
     expect(files).toEqual(expectedFiles);
   });
 
@@ -151,12 +159,9 @@ describe('retrieveFilenames', () => {
     const files = retrieveFilenames({
       customIgnoreList: ['package.json'],
     });
-    const expectedFiles = [
-      '/.gitignore',
-      '/README.md',
-      '/src/index.ts',
-      '/src/utils/helpers.ts',
-    ].map(file => `${rootPath}${file}`).sort();
+    const expectedFiles = ['/.gitignore', '/README.md', '/src/index.ts', '/src/utils/helpers.ts']
+      .map((file) => `${rootPath}${file}`)
+      .sort();
     expect(files).toEqual(expectedFiles);
   });
 
@@ -167,11 +172,9 @@ describe('retrieveFilenames', () => {
       customIgnoreList: ['src/index.ts', '*.md', '.env', '*.log', 'dist/**', 'node_modules/**'],
     });
     // effectively only package.json and .gitignore and src/utils/helpers.ts should remain
-    const expectedFiles = [
-      '/.gitignore',
-      '/package.json',
-      '/src/utils/helpers.ts',
-    ].map(file => `${rootPath}${file}`).sort();
+    const expectedFiles = ['/.gitignore', '/package.json', '/src/utils/helpers.ts']
+      .map((file) => `${rootPath}${file}`)
+      .sort();
     expect(files).toEqual(expectedFiles);
   });
 

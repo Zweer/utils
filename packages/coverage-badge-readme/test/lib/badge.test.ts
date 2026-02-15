@@ -1,10 +1,8 @@
 import type { MockInstance } from 'vitest';
-
-import type { CoverageColor } from '../../lib/types.js';
-
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createBadge } from '../../lib/badge.js';
+import type { CoverageColor } from '../../lib/types.js';
 
 describe('lib -> badge', () => {
   let consoleLogSpy: MockInstance<typeof console.log>;
@@ -22,7 +20,12 @@ describe('lib -> badge', () => {
   });
 
   describe.each([
-    { percentage: 100, expectedColor: 'brightgreen', expectedColor1: 'red', expectedColor2: '#098' },
+    {
+      percentage: 100,
+      expectedColor: 'brightgreen',
+      expectedColor1: 'red',
+      expectedColor2: '#098',
+    },
     { percentage: 99, expectedColor: 'brightgreen', expectedColor1: 'red', expectedColor2: '#098' },
     { percentage: 98, expectedColor: 'brightgreen', expectedColor1: 'red', expectedColor2: '#098' },
     { percentage: 96, expectedColor: 'green', expectedColor1: 'red', expectedColor2: '#095' },
@@ -39,7 +42,9 @@ describe('lib -> badge', () => {
     { percentage: -1, expectedColor: 'red', expectedColor1: 'red', expectedColor2: '#000' },
   ])('percentage: $percentage', ({ percentage, expectedColor, expectedColor1, expectedColor2 }) => {
     it('should use the default badge', () => {
-      expect(createBadge(percentage)).toBe(`![Coverage Badge](https://img.shields.io/badge/coverage-${percentage}%25-${expectedColor}?style=flat)`);
+      expect(createBadge(percentage)).toBe(
+        `![Coverage Badge](https://img.shields.io/badge/coverage-${percentage}%25-${expectedColor}?style=flat)`,
+      );
 
       expect(consoleLogSpy).not.toHaveBeenCalled();
       expect(consoleWarnSpy).not.toHaveBeenCalled();
@@ -47,7 +52,9 @@ describe('lib -> badge', () => {
     });
 
     it('should use a custom badge', () => {
-      expect(createBadge(percentage, undefined, '{PERCENTAGE}-{COLOR}')).toBe(`${percentage}-${expectedColor}`);
+      expect(createBadge(percentage, undefined, '{PERCENTAGE}-{COLOR}')).toBe(
+        `${percentage}-${expectedColor}`,
+      );
 
       expect(consoleLogSpy).not.toHaveBeenCalled();
       expect(consoleWarnSpy).not.toHaveBeenCalled();
@@ -56,8 +63,9 @@ describe('lib -> badge', () => {
 
     const constantCoverageColors: CoverageColor[] = [{ color: 'red' }];
     it('should use a constant coverage color (default template)', () => {
-      expect(createBadge(percentage, constantCoverageColors))
-        .toBe(`![Coverage Badge](https://img.shields.io/badge/coverage-${percentage}%25-${expectedColor1}?style=flat)`);
+      expect(createBadge(percentage, constantCoverageColors)).toBe(
+        `![Coverage Badge](https://img.shields.io/badge/coverage-${percentage}%25-${expectedColor1}?style=flat)`,
+      );
 
       expect(consoleLogSpy).not.toHaveBeenCalled();
       expect(consoleWarnSpy).not.toHaveBeenCalled();
@@ -65,7 +73,9 @@ describe('lib -> badge', () => {
     });
 
     it('should use a constant coverage color (custom template)', () => {
-      expect(createBadge(percentage, constantCoverageColors, '{PERCENTAGE}-{COLOR}')).toBe(`${percentage}-${expectedColor1}`);
+      expect(createBadge(percentage, constantCoverageColors, '{PERCENTAGE}-{COLOR}')).toBe(
+        `${percentage}-${expectedColor1}`,
+      );
 
       expect(consoleLogSpy).not.toHaveBeenCalled();
       expect(consoleWarnSpy).not.toHaveBeenCalled();
@@ -79,10 +89,11 @@ describe('lib -> badge', () => {
       { min: 80, color: '#080' },
       { min: 50, color: '#050' },
       { color: '#000' },
-    ]; ;
+    ];
     it('should use a custom coverage color (default template)', () => {
-      expect(createBadge(percentage, customCoverageColors))
-        .toBe(`![Coverage Badge](https://img.shields.io/badge/coverage-${percentage}%25-${expectedColor2}?style=flat)`);
+      expect(createBadge(percentage, customCoverageColors)).toBe(
+        `![Coverage Badge](https://img.shields.io/badge/coverage-${percentage}%25-${expectedColor2}?style=flat)`,
+      );
 
       expect(consoleLogSpy).not.toHaveBeenCalled();
       expect(consoleWarnSpy).not.toHaveBeenCalled();
@@ -90,7 +101,9 @@ describe('lib -> badge', () => {
     });
 
     it('should use a custom coverage color (custom template)', () => {
-      expect(createBadge(percentage, customCoverageColors, '{PERCENTAGE}-{COLOR}')).toBe(`${percentage}-${expectedColor2}`);
+      expect(createBadge(percentage, customCoverageColors, '{PERCENTAGE}-{COLOR}')).toBe(
+        `${percentage}-${expectedColor2}`,
+      );
 
       expect(consoleLogSpy).not.toHaveBeenCalled();
       expect(consoleWarnSpy).not.toHaveBeenCalled();
@@ -104,7 +117,9 @@ describe('lib -> badge', () => {
 
       expect(consoleLogSpy).not.toHaveBeenCalled();
       expect(consoleWarnSpy).not.toHaveBeenCalled();
-      expect(consoleErrorSpy).toHaveBeenCalledWith('The colors array has no elements. Please provide something');
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        'The colors array has no elements. Please provide something',
+      );
     });
   });
 
@@ -116,14 +131,26 @@ describe('lib -> badge', () => {
       {
         template: '{COLOR}',
         expectedBadge: color,
-        expectedWarning: ['Be aware: there is no percentagePlaceholder', '{PERCENTAGE}', 'in the badge template!'],
+        expectedWarning: [
+          'Be aware: there is no percentagePlaceholder',
+          '{PERCENTAGE}',
+          'in the badge template!',
+        ],
       },
       {
         template: '{PERCENTAGE}',
         expectedBadge: percentage.toString(),
-        expectedWarning: ['Be aware: there is no colorPlaceholder', '{COLOR}', 'in the badge template!'],
+        expectedWarning: [
+          'Be aware: there is no colorPlaceholder',
+          '{COLOR}',
+          'in the badge template!',
+        ],
       },
-    ])('should warn if it contains only the $template placeholder', ({ template, expectedWarning, expectedBadge }) => {
+    ])('should warn if it contains only the $template placeholder', ({
+      template,
+      expectedWarning,
+      expectedBadge,
+    }) => {
       expect(createBadge(percentage, undefined, template)).toBe(expectedBadge);
 
       expect(consoleLogSpy).not.toHaveBeenCalled();
