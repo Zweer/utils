@@ -2,6 +2,63 @@
 
 
 
+
+
+## @zweer/llms-txt
+
+## [0.1.0] - 2026-02-16
+
+### ✨ Features
+
+- feat(llms-txt): :sparkles: auto-detect project meta from package.json
+- feat(llms-txt): :sparkles: add CLI to generate llms.txt from docs directory
+
+### ### chore
+
+- chore(deps): :arrow_up: update dependencies and fix vulnerabilities
+- chore: :bookmark: release
+
+### ### test
+
+- test(publish-dummy-package, llms-txt): :white_check_mark: reach 100% coverage
+
+## @zweer/publish-dummy-package
+
+## [0.1.0] - 2026-02-16
+
+### ✨ Features
+
+- feat(publish-dummy-package): :sparkles: auto-login to npm when not authenticated
+- feat(publish-dummy-package): :sparkles: auto-detect workspaces from package.json
+- feat(publish-dummy-package): :sparkles: add CLI to publish dummy packages for OIDC setup
+
+### 🐛 Bug Fixes
+
+- fix(publish-dummy-package): :bug: disable provenance and improve error handling
+
+### ### chore
+
+- chore(deps): :arrow_up: update dependencies and fix vulnerabilities
+- chore: :bookmark: release
+
+## @zweer/llms-txt
+
+## [0.1.0] - 2026-02-16
+
+### ✨ Features
+
+- feat(llms-txt): :sparkles: auto-detect project meta from package.json
+- feat(llms-txt): :sparkles: add CLI to generate llms.txt from docs directory
+
+### ### chore
+
+- chore(deps): :arrow_up: update dependencies and fix vulnerabilities
+- chore: :bookmark: release
+
+### ### test
+
+- test(publish-dummy-package, llms-txt): :white_check_mark: reach 100% coverage
+
 ## @zweer/llms-txt
 
 ## [0.0.0] - 2026-02-15
