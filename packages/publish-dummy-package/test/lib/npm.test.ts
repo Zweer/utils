@@ -106,9 +106,10 @@ describe('lib -> npm', () => {
 
       publishPackage('/path/to/pkg', 'public', false);
 
-      expect(execSyncSpy).toHaveBeenCalledWith('npm publish --access public', {
+      expect(execSyncSpy).toHaveBeenCalledWith('npm publish --access public --provenance false', {
         cwd: '/path/to/pkg',
-        stdio: 'inherit',
+        stdio: 'pipe',
+        encoding: 'utf-8',
       });
     });
 
@@ -117,10 +118,14 @@ describe('lib -> npm', () => {
 
       publishPackage('/path/to/pkg', 'restricted', false);
 
-      expect(execSyncSpy).toHaveBeenCalledWith('npm publish --access restricted', {
-        cwd: '/path/to/pkg',
-        stdio: 'inherit',
-      });
+      expect(execSyncSpy).toHaveBeenCalledWith(
+        'npm publish --access restricted --provenance false',
+        {
+          cwd: '/path/to/pkg',
+          stdio: 'pipe',
+          encoding: 'utf-8',
+        },
+      );
     });
 
     it('should add --dry-run flag when dryRun is true', () => {
@@ -128,10 +133,14 @@ describe('lib -> npm', () => {
 
       publishPackage('/path/to/pkg', 'public', true);
 
-      expect(execSyncSpy).toHaveBeenCalledWith('npm publish --access public --dry-run', {
-        cwd: '/path/to/pkg',
-        stdio: 'inherit',
-      });
+      expect(execSyncSpy).toHaveBeenCalledWith(
+        'npm publish --access public --provenance false --dry-run',
+        {
+          cwd: '/path/to/pkg',
+          stdio: 'pipe',
+          encoding: 'utf-8',
+        },
+      );
     });
 
     it('should throw when publish fails', () => {

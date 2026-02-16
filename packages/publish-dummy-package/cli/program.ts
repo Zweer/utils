@@ -36,10 +36,21 @@ export function buildProgram(): Command {
         dryRun,
       });
 
+      let hasErrors = false;
+
       for (const result of results) {
         const icon =
           result.status === 'published' ? '📦' : result.status === 'skipped' ? '⏭️' : '❌';
         console.log(`${icon}  ${result.name}: ${result.reason}`);
+
+        if (result.status === 'failed') {
+          hasErrors = true;
+        }
+      }
+
+      if (hasErrors) {
+        console.log('\n❌ Some packages failed to publish');
+        process.exit(1);
       }
 
       console.log('\n✨ Done!');

@@ -36,8 +36,14 @@ export function publishPackage(
   access: 'public' | 'restricted',
   dryRun: boolean,
 ): void {
-  const args = [`--access ${access}`];
+  const args = [`--access ${access}`, '--provenance false'];
   if (dryRun) args.push('--dry-run');
 
-  execSync(`npm publish ${args.join(' ')}`, { cwd: pkgPath, stdio: 'inherit' });
+  try {
+    execSync(`npm publish ${args.join(' ')}`, { cwd: pkgPath, stdio: 'pipe', encoding: 'utf-8' });
+  } catch (error) {
+    const err = error as { stdout?: string; stderr?: string; message: string };
+    const output = [err.stdout, err.stderr].filter(Boolean).join('\n');
+    throw new Error(output || err.message);
+  }
 }

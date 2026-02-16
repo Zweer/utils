@@ -217,9 +217,11 @@ describe('cli -> program', () => {
         return '';
       });
 
-      buildProgram().parse([], { from: 'user' });
+      expect(() => buildProgram().parse([], { from: 'user' })).toThrow('process.exit');
 
       expect(consoleLogSpy).toHaveBeenCalledWith('❌  @zweer/pkg-a: EPERM');
+      expect(consoleLogSpy).toHaveBeenCalledWith('\n❌ Some packages failed to publish');
+      expect(process.exit).toHaveBeenCalledWith(1);
     });
   });
 
