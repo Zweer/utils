@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { cwd } from 'node:process';
 
@@ -46,6 +46,8 @@ export function buildProgram(): Command {
 
       const sections = scanPages(options.docsDir);
       const llmsTxtOptions = { projectName, projectDescription, siteUrl, sections };
+
+      mkdirSync(options.outDir, { recursive: true });
 
       writeFileSync(join(options.outDir, 'llms.txt'), generateLlmsTxt(llmsTxtOptions));
       console.log('✅ Generated: llms.txt');

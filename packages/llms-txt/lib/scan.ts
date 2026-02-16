@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { basename, join, relative } from 'node:path';
 
 import type { Page, Section } from './types.js';
@@ -48,6 +48,10 @@ function collectMarkdownFiles(dir: string): string[] {
 }
 
 export function scanPages(docsDir: string): Section[] {
+  if (!existsSync(docsDir)) {
+    return [];
+  }
+
   const files = collectMarkdownFiles(docsDir);
   const sectionMap = new Map<string, Page[]>();
 

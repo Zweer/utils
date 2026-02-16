@@ -148,6 +148,40 @@ describe('cli -> program', () => {
       expect(llmsTxt).toContain('> Custom desc');
       expect(llmsTxt).toContain('https://custom.com');
     });
+
+    it('should create output directory if it does not exist', () => {
+      vol.fromNestedJSON({
+        [rootPath]: {
+          'package.json': actionPkgJson,
+          docs: {
+            'index.md': '# Home',
+          },
+        },
+      });
+
+      buildProgram().parse([], { from: 'user' });
+
+      expect(vol.existsSync(outDir)).toBe(true);
+      expect(vol.existsSync(`${outDir}/llms.txt`)).toBe(true);
+      expect(vol.existsSync(`${outDir}/llms-full.txt`)).toBe(true);
+    });
+
+    it('should handle missing docs directory gracefully', () => {
+      vol.fromNestedJSON({
+        [rootPath]: {
+          'package.json': actionPkgJson,
+        },
+      });
+
+      buildProgram().parse([], { from: 'user' });
+
+      expect(consoleLogSpy).toHaveBeenCalledWith('✅ Generated: llms.txt');
+      expect(consoleLogSpy).toHaveBeenCalledWith('✅ Generated: llms-full.txt');
+
+      const llmsTxt = vol.readFileSync(`${outDir}/llms.txt`, 'utf8') as string;
+      expect(llmsTxt).toContain('# llms-txt');
+      expect(llmsTxt).not.toContain('- [');
+    });
   });
 
   describe('version', () => {

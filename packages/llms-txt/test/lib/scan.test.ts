@@ -154,6 +154,12 @@ describe('lib -> scan', () => {
     expect(sections).toEqual([]);
   });
 
+  it('should return empty array when docs directory does not exist', () => {
+    const sections = scanPages('/nonexistent/docs');
+
+    expect(sections).toEqual([]);
+  });
+
   it('should strip frontmatter from content', () => {
     vol.fromNestedJSON({
       [docsDir]: {
