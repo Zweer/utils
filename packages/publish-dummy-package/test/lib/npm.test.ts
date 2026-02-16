@@ -108,8 +108,7 @@ describe('lib -> npm', () => {
 
       expect(execSyncSpy).toHaveBeenCalledWith('npm publish --access public --provenance false', {
         cwd: '/path/to/pkg',
-        stdio: 'pipe',
-        encoding: 'utf-8',
+        stdio: 'inherit',
       });
     });
 
@@ -122,8 +121,7 @@ describe('lib -> npm', () => {
         'npm publish --access restricted --provenance false',
         {
           cwd: '/path/to/pkg',
-          stdio: 'pipe',
-          encoding: 'utf-8',
+          stdio: 'inherit',
         },
       );
     });
@@ -137,8 +135,7 @@ describe('lib -> npm', () => {
         'npm publish --access public --provenance false --dry-run',
         {
           cwd: '/path/to/pkg',
-          stdio: 'pipe',
-          encoding: 'utf-8',
+          stdio: 'inherit',
         },
       );
     });
