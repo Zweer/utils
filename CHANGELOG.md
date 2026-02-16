@@ -5,6 +5,15 @@
 
 
 
+
+## @zweer/llms-txt
+
+## [0.2.0] - 2026-02-16
+
+### 🐛 Bug Fixes
+
+- fix(llms-txt): :bug: handle missing docs and output directories gracefully
+
 ## @zweer/publish-dummy-package
 
 ## [0.2.0] - 2026-02-16
