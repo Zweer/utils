@@ -4,6 +4,15 @@
 
 
 
+
+## @zweer/publish-dummy-package
+
+## [0.2.0] - 2026-02-16
+
+### 🐛 Bug Fixes
+
+- fix(publish-dummy-package): :bug: use stdio inherit for interactive npm authentication
+
 ## @zweer/llms-txt
 
 ## [0.1.0] - 2026-02-16

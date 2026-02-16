@@ -2,6 +2,13 @@
 
 
 
+
+## [0.2.0] - 2026-02-16
+
+### 🐛 Bug Fixes
+
+- fix(publish-dummy-package): :bug: use stdio inherit for interactive npm authentication
+
 ## [0.1.0] - 2026-02-16
 
 ### ✨ Features
