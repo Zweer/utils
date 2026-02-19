@@ -182,12 +182,16 @@ describe('cli -> program', () => {
 ${description}
 
 Options:
-  -V, --version           output the version number
-  --readme-path <PATH>    The path of the README file (default:
-                          "/fake/root/path/README.md")
-  --coverage-path <PATH>  The path of the coverage-summary.json file (default:
-                          "/fake/root/path/coverage/coverage-summary.json")
-  -h, --help              display help for command
+  -V, --version               output the version number
+  --readme-path <PATH>        The path of the README file (default:
+                              "/fake/root/path/README.md")
+  --coverage-path <PATH>      The path of the coverage-summary.json file
+                              (default:
+                              "/fake/root/path/coverage/coverage-summary.json")
+  --coverage-metric <METRIC>  The coverage metric to use (lines, branches,
+                              functions, statements, branchesTrue, average, min)
+                              (default: "lines")
+  -h, --help                  display help for command
 `;
 
     it.each(['--help', '-h'])('should print the help message when "%s"', (helpOption) => {

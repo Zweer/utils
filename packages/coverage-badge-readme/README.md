@@ -66,6 +66,7 @@ Your `README.md` will be automatically updated:
 | :--- | :--- | :--- |:--- |:--- |
 | `--readme-path` | | Path to the README.md file. | `./README.md` | No |
 | `--coverage-path` | | Path to the `coverage-summary.json` file. | `./coverage/coverage-summary.json` | No |
+| `--coverage-metric` | | The coverage metric to use. Valid values: `lines`, `branches`, `functions`, `statements`, `branchesTrue`, `average`, `min`. | `lines` | No |
 | `--help` | `-h` | Show the help menu. | | |
 
 ## 📄 License

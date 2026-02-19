@@ -5,7 +5,7 @@ import type { MockInstance } from 'vitest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { extractCoverage } from '../../lib/coverage.js';
-import { CoverageMetric } from '../../lib/types.js';
+import { CoverageAggregation, CoverageMetric } from '../../lib/types.js';
 
 vi.mock('node:fs', async () => {
   const { fs } = await import('memfs');
@@ -102,6 +102,14 @@ describe('lib -> coverage', () => {
       { metric: CoverageMetric.FUNCTIONS, expected: functionsPct },
       { metric: CoverageMetric.LINES, expected: linesPct },
       { metric: CoverageMetric.STATEMENTS, expected: statementsPct },
+      {
+        metric: CoverageAggregation.AVERAGE,
+        expected: (branchesPct + functionsPct + linesPct + statementsPct) / 4,
+      },
+      {
+        metric: CoverageAggregation.MIN,
+        expected: Math.min(branchesPct, functionsPct, linesPct, statementsPct),
+      },
     ])('should handle every metric: $metric', ({ metric, expected }) => {
       expect(extractCoverage(coveragePath, metric)).toBe(expected);
 

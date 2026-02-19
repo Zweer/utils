@@ -13,6 +13,20 @@ export enum CoverageMetric {
   STATEMENTS = 'statements',
 }
 
+export enum CoverageAggregation {
+  AVERAGE = 'average',
+  MIN = 'min',
+}
+
+export type CoverageMode = CoverageAggregation | CoverageMetric;
+
+export const AGGREGATION_METRICS: readonly CoverageMetric[] = [
+  CoverageMetric.BRANCHES,
+  CoverageMetric.FUNCTIONS,
+  CoverageMetric.LINES,
+  CoverageMetric.STATEMENTS,
+];
+
 type FileCoverage = Record<CoverageMetric, CoverageDetail>;
 
 export type Coverage = {

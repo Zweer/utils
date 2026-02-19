@@ -7,6 +7,6 @@ export {
 } from './constants.js';
 export { extractCoverage } from './coverage.js';
 export { modifyReadme } from './readme.js';
-export type { Coverage, CoverageColor } from './types.js';
-export { Color, CoverageMetric } from './types.js';
+export type { Coverage, CoverageColor, CoverageMode } from './types.js';
+export { Color, CoverageAggregation, CoverageMetric } from './types.js';
 export { escapeRegex } from './utils.js';

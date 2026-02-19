@@ -1,26 +1,23 @@
 import { existsSync, readFileSync } from 'node:fs';
 
-import type { Coverage } from './types.js';
-import { CoverageMetric } from './types.js';
+import type { Coverage, CoverageMode } from './types.js';
+import { AGGREGATION_METRICS, CoverageAggregation, CoverageMetric } from './types.js';
 
-export function extractCoverage(filePath: string, coverageMetric: CoverageMetric): number {
-  if (!Object.values(CoverageMetric).includes(coverageMetric)) {
-    console.error(
-      `"${coverageMetric}" has an invalid value. It must be one of the CoverageMetrics`,
-    );
-    throw new Error('CoverageMetric');
-  }
+const VALID_MODES = new Set<string>([
+  ...Object.values(CoverageMetric),
+  ...Object.values(CoverageAggregation),
+]);
 
+function parseCoverageFile(filePath: string): Coverage {
   if (!existsSync(filePath)) {
     console.error('No coverage file found at', filePath);
     throw new Error('FileNotFound');
   }
 
   const fileContent = readFileSync(filePath, 'utf8');
-  let coverage: Coverage;
 
   try {
-    coverage = JSON.parse(fileContent) as Coverage;
+    return JSON.parse(fileContent) as Coverage;
   } catch (_error) {
     console.error(
       'Invalid coverage file at',
@@ -29,12 +26,14 @@ export function extractCoverage(filePath: string, coverageMetric: CoverageMetric
     );
     throw new Error('InvalidCoverageFile');
   }
+}
 
+function getMetricPct(coverage: Coverage, filePath: string, metric: CoverageMetric): number {
   if (
     !coverage ||
     !coverage.total ||
-    !coverage.total[coverageMetric] ||
-    typeof coverage.total[coverageMetric].pct !== 'number'
+    !coverage.total[metric] ||
+    typeof coverage.total[metric].pct !== 'number'
   ) {
     console.error(
       'Invalid coverage json file at',
@@ -44,7 +43,29 @@ export function extractCoverage(filePath: string, coverageMetric: CoverageMetric
     throw new Error('InvalidCoverageJsonFile');
   }
 
-  const coveragePct = coverage.total[coverageMetric].pct;
+  return coverage.total[metric].pct;
+}
+
+export function extractCoverage(filePath: string, mode: CoverageMode): number {
+  if (!VALID_MODES.has(mode)) {
+    console.error(`"${mode}" has an invalid value. It must be one of the CoverageMetrics`);
+    throw new Error('CoverageMetric');
+  }
+
+  const coverage = parseCoverageFile(filePath);
+
+  let coveragePct: number;
+
+  if (mode === CoverageAggregation.AVERAGE || mode === CoverageAggregation.MIN) {
+    const values = AGGREGATION_METRICS.map((metric) => getMetricPct(coverage, filePath, metric));
+    coveragePct =
+      mode === CoverageAggregation.AVERAGE
+        ? values.reduce((sum, v) => sum + v, 0) / values.length
+        : Math.min(...values);
+  } else {
+    coveragePct = getMetricPct(coverage, filePath, mode);
+  }
+
   console.log('Coverage percentage found:', coveragePct);
 
   return coveragePct;

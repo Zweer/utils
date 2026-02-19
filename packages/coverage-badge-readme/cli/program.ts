@@ -7,6 +7,7 @@ import { Command } from '@commander-js/extra-typings';
 import { createBadge } from '../lib/badge.js';
 import { extractCoverage } from '../lib/coverage.js';
 import { modifyReadme } from '../lib/readme.js';
+import type { CoverageMode } from '../lib/types.js';
 import { CoverageMetric } from '../lib/types.js';
 
 interface Package {
@@ -30,9 +31,14 @@ export function buildProgram(): Command {
       'The path of the coverage-summary.json file',
       join(cwd(), 'coverage', 'coverage-summary.json'),
     )
+    .option(
+      '--coverage-metric <METRIC>',
+      'The coverage metric to use (lines, branches, functions, statements, branchesTrue, average, min)',
+      CoverageMetric.LINES,
+    )
     .action((options, _command) => {
-      const { coveragePath, readmePath } = options;
-      const percentage = extractCoverage(coveragePath, CoverageMetric.LINES);
+      const { coveragePath, readmePath, coverageMetric } = options;
+      const percentage = extractCoverage(coveragePath, coverageMetric as CoverageMode);
       const badge = createBadge(Math.round(percentage));
       modifyReadme(readmePath, badge);
     });
