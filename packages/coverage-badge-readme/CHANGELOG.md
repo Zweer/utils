@@ -15,6 +15,13 @@
 # @zweer/coverage-badge-readme [1.2.0](https://github.com/Zweer/utils/compare/@zweer/coverage-badge-readme@1.1.1...@zweer/coverage-badge-readme@1.2.0) (2025-06-17)
 
 
+
+## [1.2.2] - 2026-02-22
+
+### ✨ Features
+
+- feat(coverage-badge-readme): :sparkles: add --coverage-metric option with average and min support
+
 ### Features
 
 * **export:** :sparkles: Added the cli ([9192ed9](https://github.com/Zweer/utils/commit/9192ed9bba25b24314ad5f3d9d15b8c8ddc6eac5))

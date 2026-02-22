@@ -6,6 +6,15 @@
 
 
 
+
+## @zweer/coverage-badge-readme
+
+## [1.2.2] - 2026-02-22
+
+### ✨ Features
+
+- feat(coverage-badge-readme): :sparkles: add --coverage-metric option with average and min support
+
 ## @zweer/llms-txt
 
 ## [0.2.0] - 2026-02-16
