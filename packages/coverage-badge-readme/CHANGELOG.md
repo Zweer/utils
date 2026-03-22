@@ -16,6 +16,17 @@
 
 
 
+
+## [1.3.0] - 2026-03-22
+
+### ✨ Features
+
+- feat(coverage-badge-readme): :sparkles: add --coverage-metric option with average and min support
+
+### ### chore
+
+- chore: :bookmark: release
+
 ## [1.2.2] - 2026-02-22
 
 ### ✨ Features
