@@ -15,9 +15,11 @@ Build **simple, focused, and reliable CLI tools** in TypeScript that:
 
 | Doc | Content |
 |-----|---------|
-| `build-tooling.md` | tsdown, biome, husky, lint-staged, CI/CD |
+| `build-tooling.md` | tsdown, biome, lefthook, CI/CD |
 | `code-style.md` | TypeScript conventions, naming, error handling |
 | `testing.md` | Vitest, coverage, mocking patterns |
+| `interaction.md` | Interview, plan mode, context hygiene |
+| `commit-conventions.md` | Conventional commits + gitmoji |
 
 ## 🏗️ Architecture
 
@@ -44,6 +46,8 @@ packages/<name>/
 |---------|-------------|
 | `@zweer/coverage-badge-readme` | Update test coverage badge in README.md |
 | `@zweer/export-code` | Export codebase into a single file for AI prompts |
+| `@zweer/llms-txt` | Generate `llms.txt` and `llms-full.txt` from a docs directory |
+| `@zweer/publish-dummy-package` | Publish dummy packages to npm for OIDC provenance setup |
 
 ## 🔧 Build & Tooling
 
@@ -52,7 +56,7 @@ packages/<name>/
 | **tsdown** | Build (workspace mode, dts, sourcemap) | `tsdown.config.ts` |
 | **vitest** | Tests (v8 coverage) | `vitest.config.ts` |
 | **biome** | Lint + format (single quotes, 100 line width) | `biome.json` |
-| **husky** | Git hooks (commitlint, lint-staged) | `.husky/` |
+| **lefthook** | Git hooks (commitlint, biome, test) | `lefthook.yml` |
 | **bonvoy** | Release automation | `bonvoy.config.ts` |
 | **GitHub Actions** | CI/CD | `.github/workflows/` |
 
@@ -92,7 +96,7 @@ Conventional commits + gitmoji:
 type(scope): :gitmoji: description
 ```
 
-See `.kiro/skills/commit-format.md` for full details.
+See `.kiro/steering/commit-conventions.md` for full details.
 
 ## 📝 Communication Style
 

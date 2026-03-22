@@ -6,7 +6,12 @@
 mkdir -p packages/<name>/{cli,lib,test/{cli,lib}}
 ```
 
-## 2. Create package.json
+## 2. Read existing package metadata
+
+From root `package.json` or an existing package, extract:
+- `author`, `license`, `repository`, `homepage`, `bugs`
+
+## 3. Create package.json
 
 ```json
 {
@@ -29,7 +34,7 @@ mkdir -p packages/<name>/{cli,lib,test/{cli,lib}}
 }
 ```
 
-## 3. Create cli/index.ts
+## 4. Create cli/index.ts
 
 ```typescript
 #!/usr/bin/env node
@@ -37,7 +42,7 @@ import { buildProgram } from './program.js'
 buildProgram().parse()
 ```
 
-## 4. Create cli/program.ts
+## 5. Create cli/program.ts
 
 ```typescript
 import { readFileSync } from 'node:fs'
@@ -59,14 +64,26 @@ export function buildProgram(): Command {
 }
 ```
 
-## 5. Create lib/index.ts
+## 6. Create lib/index.ts
 
 Re-export all public API from this file.
 
-## 6. Create test files, README.md, CHANGELOG.md
+## 7. Create test files
 
-## 7. Add scope to .vscode/settings.json
+Match the existing test structure with `cli/` and `lib/` subdirectories.
 
-## 8. Update root README.md packages table
+## 8. Create README.md and CHANGELOG.md
 
-## 9. Run `npm install && npm run build && npm test`
+## 9. Add scope to .vscode/settings.json
+
+If `conventionalCommits.scopes` exists, add the package name (without scope prefix).
+
+## 10. Update root README.md packages table
+
+## 11. Install, build, test
+
+```bash
+npm install && npm run build && npm test
+```
+
+**Note**: tsconfig.json is NOT needed per package — TypeScript uses the root tsconfig.json.

@@ -3,10 +3,11 @@
 ## Build System
 
 ### tsdown
-- **tsdown** for building all packages (NOT tsc, esbuild, rollup, or others)
+- **tsdown** for building all packages (NOT tsc, esbuild, rollup)
 - Configuration: `tsdown.config.ts` at root
 - Workspace mode: builds all packages in one pass
-- Outputs: `.mjs` files + `.d.ts` type definitions + sourcemaps
+- Outputs: `.mjs` + `.d.ts` + sourcemaps
+- tsc is only used for type-checking (`tsc --noEmit`)
 
 ### Build Output
 ```
@@ -22,6 +23,7 @@ packages/<name>/
 ### Build Commands
 ```bash
 npm run build              # Build all packages
+npm run clean              # Remove dist/
 ```
 
 ## Package Configuration
@@ -52,24 +54,28 @@ npm run build              # Build all packages
 - **Biome** for linting and formatting (NOT ESLint/Prettier)
 - Configuration: `biome.json` at root
 - Single quotes, 100 line width
-- Runs on pre-commit hook via husky + lint-staged
+- Uses `.editorconfig` for indent settings
+- Import sorting with grouped blank lines
 
 ### Commands
 ```bash
-npm run lint               # Check all (biome + typecheck + lockfile + package.json)
+npm run lint               # All linters in parallel
 npm run lint:format        # Biome check + fix
 npm run lint:typecheck     # TypeScript check
+npm run lint:lockfile      # Lockfile security
+npm run lint:package       # package.json validation
+npm run lint:sort_package  # Sort package.json keys
+npm run lint:engines       # Validate engine compatibility
 ```
 
 ## Git Hooks
 
-### Husky + lint-staged
-- Pre-commit: runs lint-staged (biome, tests, build)
-- Commit-msg: validates conventional commit format via commitlint
-
-### commitlint
-- Validates conventional commit format
-- Configuration in root `package.json` (`commitlint` field)
+### Lefthook
+- **Lefthook** for git hooks (NOT husky + lint-staged)
+- Configuration: `lefthook.yml` at root
+- Pre-commit: biome → lockfile → package-lint → sort → build → typecheck → test
+- Commit-msg: commitlint validation
+- Built-in staging support (`stage_fixed: true`)
 
 ## Package Manager
 
@@ -90,18 +96,18 @@ npm run lint:typecheck     # TypeScript check
 - Independent versioning per package
 - Creates git tags, GitHub releases, publishes to npm
 
-## Development Workflow
+## Scripts Reference
 
-### Initial Setup
-```bash
-npm install
-npm run build
-npm test
-```
-
-### Before Commit
-```bash
-npm run lint
-npm test
-npm run test:coverage
-```
+| Script | Description |
+|--------|-------------|
+| `npm run build` | Build with tsdown |
+| `npm run clean` | Remove dist/ |
+| `npm run lint` | All linters in parallel |
+| `npm run lint:format` | Biome check + fix |
+| `npm run lint:typecheck` | TypeScript check |
+| `npm run lint:lockfile` | Lockfile security |
+| `npm run lint:package` | package.json validation |
+| `npm run lint:sort_package` | Sort package.json keys |
+| `npm run lint:engines` | Validate engine compatibility |
+| `npm test` | Run tests |
+| `npm run test:coverage` | Tests with coverage |

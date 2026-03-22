@@ -2,7 +2,7 @@
   "name": "dev",
   "description": "Agent for @zweer/utils - Monorepo of Node.js CLI utilities",
   "prompt": "file://../prompts/dev.md",
-  "resources": ["file://README.md", "file://.kiro/steering/**/*.md"],
+  "resources": ["file://README.md", "file://.kiro/specs/**/*.md", "file://.kiro/steering/**/*.md"],
   "tools": [
     "read",
     "write",
@@ -33,19 +33,20 @@
       "allowedPaths": [
         ".kiro/**",
         "packages/**",
+        "docs/**",
         ".github/**",
         "README.md",
         "CHANGELOG.md",
         "package.json",
         "package-lock.json",
-        "bonvoy.config.ts",
-        "vitest.config.ts",
-        "tsdown.config.ts",
         "tsconfig.json",
+        "tsdown.config.ts",
+        "vitest.config.ts",
         "biome.json",
+        "lefthook.yml",
+        "bonvoy.config.ts",
         ".editorconfig",
         ".gitignore",
-        ".lintstagedrc",
         ".npmpackagejsonlintrc.json",
         ".npmpackagejsonlintignore"
       ]
