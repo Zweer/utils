@@ -71,7 +71,7 @@
     "@vitest/coverage-v8": "^4.1.7",
     "@zweer/coverage-badge-readme": "^1.4.0",
     "bonvoy": "^0.13.1",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.1",
     "lefthook": "^2.1.8",
     "lockfile-lint": "^5.0.0",
     "ls-engines": "^0.10.0",
