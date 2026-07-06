@@ -64,7 +64,7 @@
   "devDependencies": {
     "@arethetypeswrong/core": "^0.18.4",
     "@biomejs/biome": "^2.5.1",
-    "@commitlint/cli": "^20.5.3",
+    "@commitlint/cli": "^21.2.0",
     "@commitlint/config-conventional": "^20.5.3",
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "^25.9.3",
