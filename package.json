@@ -86,7 +86,7 @@
     "vitest": "^4.1.0"
   },
   "engines": {
-    "node": ">= 20.5"
+    "node": ">= 22.18"
   },
   "lockfile-lint": {
     "path": "package-lock.json",
