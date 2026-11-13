@@ -30,9 +30,9 @@
     "build": "tsdown",
     "postbuild": "npm install",
     "clean": "rimraf --glob packages/**/dist",
-    "docs:build": "vitepress build docs",
-    "docs:dev": "vitepress dev docs",
-    "docs:preview": "vitepress preview docs",
+    "docs:build": "astro build --root docs",
+    "docs:dev": "astro dev --root docs",
+    "docs:preview": "astro preview --root docs",
     "prelint": "npm run build",
     "lint": "concurrently npm:lint:* --prefixColors auto",
     "postlint": "npm run clean",
@@ -58,11 +58,9 @@
       "@commitlint/config-conventional"
     ]
   },
-  "overrides": {
-    "esbuild": "^0.27.3"
-  },
   "devDependencies": {
     "@arethetypeswrong/core": "^0.18.4",
+    "@astrojs/starlight": "^0.42.11",
     "@biomejs/biome": "^2.5.2",
     "@commitlint/cli": "^20.5.3",
     "@commitlint/config-conventional": "^20.5.3",
@@ -70,6 +68,7 @@
     "@types/node": "^25.9.3",
     "@vitest/coverage-v8": "^4.1.9",
     "@zweer/coverage-badge-readme": "^1.4.0",
+    "astro": "^7.4.11",
     "bonvoy": "^0.13.1",
     "concurrently": "^9.2.1",
     "lefthook": "^2.1.9",
@@ -84,11 +83,10 @@
     "tsdown": "^0.22.3",
     "tsx": "^4.23.0",
     "typescript": "^5.9.3",
-    "vitepress": "^1.6.4",
     "vitest": "^4.1.0"
   },
   "engines": {
-    "node": ">= 20.5"
+    "node": ">= 22.18"
   },
   "lockfile-lint": {
     "path": "package-lock.json",

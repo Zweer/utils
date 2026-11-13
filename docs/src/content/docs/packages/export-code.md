@@ -3,8 +3,6 @@ title: export-code
 description: Export your entire codebase into a single file, perfect for AI prompts
 ---
 
-# export-code
-
 A CLI tool to consolidate your entire project's source code into a single, well-formatted text file. Ideal for providing context to Large Language Models (LLMs) like GPT-4, Claude, or for creating a simple project archive.
 
 ## Why?

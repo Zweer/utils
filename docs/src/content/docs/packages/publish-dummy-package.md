@@ -3,8 +3,6 @@ title: publish-dummy-package
 description: Publish dummy packages to npm for OIDC provenance setup in monorepos
 ---
 
-# publish-dummy-package
-
 A CLI tool to publish dummy packages to npm for OIDC provenance setup in monorepos.
 
 When using npm OIDC (provenance) publishing from CI (e.g., GitHub Actions), the package must already exist on npm. This tool scans your monorepo, finds unpublished packages, and publishes a minimal placeholder so you can then configure OIDC trusted publishers.

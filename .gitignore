@@ -95,11 +95,9 @@ dist
 .temp
 .cache
 
-# vitepress build output
-**/.vitepress/dist
-
-# vitepress cache directory
-**/.vitepress/cache
+# Astro build output
+docs/dist/
+.astro/
 
 # Serverless directories
 .serverless/
