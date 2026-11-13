@@ -3,8 +3,6 @@ title: coverage-badge-readme
 description: Automatically update a test coverage badge in your README.md
 ---
 
-# coverage-badge-readme
-
 A simple CLI tool to automatically read your test coverage summary and inject an up-to-date [Shields.io](https://shields.io/) badge into your `README.md`.
 
 Never manually update your coverage percentage again!

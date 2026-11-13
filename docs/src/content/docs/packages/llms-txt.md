@@ -3,8 +3,6 @@ title: llms-txt
 description: Generate llms.txt and llms-full.txt files from a docs directory
 ---
 
-# llms-txt
-
 A CLI tool to generate `llms.txt` and `llms-full.txt` files from a docs directory (e.g., VitePress).
 
 Follows the [llms.txt specification](https://llmstxt.org/) to make your documentation AI-friendly.
