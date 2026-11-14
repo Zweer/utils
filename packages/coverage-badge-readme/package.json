@@ -1,6 +1,6 @@
 {
   "name": "@zweer/coverage-badge-readme",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "A CLI tool to automatically update a test coverage badge in your README.md",
   "keywords": [
     "utility",

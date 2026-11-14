@@ -17,6 +17,34 @@
 
 
 
+
+
+
+
+## [1.4.0] - 2026-11-14
+
+### 💥 Breaking Changes
+
+- chore!: upgrade all dependencies, drop Node 20 (require Node >= 22.12)
+
+## [1.4.0] - 2026-11-14
+
+### 💥 Breaking Changes
+
+- chore!: upgrade all dependencies, drop Node 20 (require Node >= 22.12)
+
+## [1.4.0] - 2026-11-14
+
+### 💥 Breaking Changes
+
+- chore!: upgrade all dependencies, drop Node 20 (require Node >= 22.12)
+
+## [1.4.0] - 2026-11-14
+
+### 💥 Breaking Changes
+
+- chore!: upgrade all dependencies, drop Node 20 (require Node >= 22.12)
+
 ## [1.3.0] - 2026-03-22
 
 ### ✨ Features
