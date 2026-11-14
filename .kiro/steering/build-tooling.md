@@ -72,7 +72,7 @@ npm run lint:typecheck     # TypeScript check
 npm run lint:lockfile      # Lockfile security
 npm run lint:package       # package.json validation
 npm run lint:sort_package  # Sort package.json keys
-npm run lint:engines       # Validate engine compatibility
+npm run lint:engines       # Validate engines against the dependency graph (installed-check)
 ```
 
 ## Git Hooks
@@ -109,16 +109,16 @@ npm run lint:engines       # Validate engine compatibility
 
 ## Scripts Reference
 
-| Script                      | Description                   |
-| --------------------------- | ----------------------------- |
-| `npm run build`             | Build with tsdown             |
-| `npm run clean`             | Remove dist/                  |
-| `npm run lint`              | All linters in parallel       |
-| `npm run lint:format`       | Biome check + fix             |
-| `npm run lint:typecheck`    | TypeScript check              |
-| `npm run lint:lockfile`     | Lockfile security             |
-| `npm run lint:package`      | package.json validation       |
-| `npm run lint:sort_package` | Sort package.json keys        |
-| `npm run lint:engines`      | Validate engine compatibility |
-| `npm test`                  | Run tests                     |
-| `npm run test:coverage`     | Tests with coverage           |
+| Script                      | Description                        |
+| --------------------------- | ---------------------------------- |
+| `npm run build`             | Build with tsdown                  |
+| `npm run clean`             | Remove dist/                       |
+| `npm run lint`              | All linters in parallel            |
+| `npm run lint:format`       | Biome check + fix                  |
+| `npm run lint:typecheck`    | TypeScript check                   |
+| `npm run lint:lockfile`     | Lockfile security                  |
+| `npm run lint:package`      | package.json validation            |
+| `npm run lint:sort_package` | Sort package.json keys             |
+| `npm run lint:engines`      | Validate engines (installed-check) |
+| `npm test`                  | Run tests                          |
+| `npm run test:coverage`     | Tests with coverage                |
