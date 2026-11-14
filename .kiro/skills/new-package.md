@@ -9,6 +9,7 @@ mkdir -p packages/<name>/{cli,lib,test/{cli,lib}}
 ## 2. Read existing package metadata
 
 From root `package.json` or an existing package, extract:
+
 - `author`, `license`, `repository`, `homepage`, `bugs`
 
 ## 3. Create package.json
@@ -21,7 +22,11 @@ From root `package.json` or an existing package, extract:
   "keywords": [],
   "homepage": "https://github.com/Zweer/utils/tree/main/packages/<name>#readme",
   "bugs": { "url": "https://github.com/Zweer/utils/issues" },
-  "repository": { "type": "git", "url": "git+https://github.com/Zweer/utils.git", "directory": "packages/<name>" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zweer/utils.git",
+    "directory": "packages/<name>"
+  },
   "license": "MIT",
   "author": { "name": "Zweer", "email": "n.olivieriachille@gmail.com" },
   "type": "module",
@@ -45,22 +50,28 @@ buildProgram().parse()
 ## 5. Create cli/program.ts
 
 ```typescript
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
-import { Command } from '@commander-js/extra-typings'
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { Command } from '@commander-js/extra-typings';
 
-interface Package { name: string; version: string; description: string }
+interface Package {
+  name: string;
+  version: string;
+  description: string;
+}
 
 export function buildProgram(): Command {
   const pkg = JSON.parse(
     readFileSync(join(import.meta.dirname, '..', '..', 'package.json'), 'utf8'),
-  ) as Package
+  ) as Package;
 
   return new Command()
     .name(pkg.name.replace('@zweer/', ''))
     .description(pkg.description)
     .version(pkg.version)
-    .action(() => { /* implementation */ })
+    .action(() => {
+      /* implementation */
+    });
 }
 ```
 

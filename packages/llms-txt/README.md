@@ -32,34 +32,34 @@ llms-txt \
 
 ### Options
 
-| Option | Default | Description |
-| :--- | :--- | :--- |
-| `--project-name <NAME>` | *required* | Project name for the header |
-| `--project-description <DESC>` | *required* | Project description |
-| `--site-url <URL>` | *required* | Base URL of the site |
-| `--docs-dir <PATH>` | `./docs` | Path to the docs directory |
-| `--out-dir <PATH>` | `./docs/public` | Output directory |
+| Option                         | Default         | Description                 |
+| :----------------------------- | :-------------- | :-------------------------- |
+| `--project-name <NAME>`        | _required_      | Project name for the header |
+| `--project-description <DESC>` | _required_      | Project description         |
+| `--site-url <URL>`             | _required_      | Base URL of the site        |
+| `--docs-dir <PATH>`            | `./docs`        | Path to the docs directory  |
+| `--out-dir <PATH>`             | `./docs/public` | Output directory            |
 
 ### Programmatic API
 
 ```typescript
-import { generateLlmsFullTxt, generateLlmsTxt, scanPages } from '@zweer/llms-txt'
+import { generateLlmsFullTxt, generateLlmsTxt, scanPages } from '@zweer/llms-txt';
 
-const sections = scanPages('./docs')
+const sections = scanPages('./docs');
 
 const llmsTxt = generateLlmsTxt({
   projectName: 'My Project',
   projectDescription: 'A cool project',
   siteUrl: 'https://example.com',
   sections,
-})
+});
 
 const llmsFullTxt = generateLlmsFullTxt({
   projectName: 'My Project',
   projectDescription: 'A cool project',
   siteUrl: 'https://example.com',
   sections,
-})
+});
 ```
 
 ## How It Works

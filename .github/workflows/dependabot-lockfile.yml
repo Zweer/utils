@@ -3,8 +3,8 @@ name: Dependabot Lockfile Fix
 on:
   pull_request:
     paths:
-      - 'package.json'
-      - 'packages/*/package.json'
+      - "package.json"
+      - "packages/*/package.json"
 
 permissions:
   contents: write
@@ -14,12 +14,12 @@ jobs:
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: lts/*
 

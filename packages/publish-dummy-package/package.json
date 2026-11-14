@@ -30,7 +30,9 @@
     "./bin": "./dist/bin.mjs",
     "./package.json": "./package.json"
   },
-  "bin": "./dist/bin.mjs",
+  "bin": {
+    "publish-dummy-package": "./dist/bin.mjs"
+  },
   "files": [
     "dist"
   ],

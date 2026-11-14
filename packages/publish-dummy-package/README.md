@@ -30,11 +30,11 @@ publish-dummy-package --access restricted
 
 ### Options
 
-| Option | Default | Description |
-| :--- | :--- | :--- |
-| `--packages-dir <PATH>` | `./packages` | Path to the packages directory |
-| `--access <ACCESS>` | `public` | npm publish access level (`public` or `restricted`) |
-| `--dry-run` | `false` | Perform a dry run without publishing |
+| Option                  | Default      | Description                                         |
+| :---------------------- | :----------- | :-------------------------------------------------- |
+| `--packages-dir <PATH>` | `./packages` | Path to the packages directory                      |
+| `--access <ACCESS>`     | `public`     | npm publish access level (`public` or `restricted`) |
+| `--dry-run`             | `false`      | Perform a dry run without publishing                |
 
 ### Programmatic API
 
@@ -43,20 +43,20 @@ import {
   checkNpmLogin,
   discoverWorkspacePackages,
   publishDummyPackages,
-} from '@zweer/publish-dummy-package'
+} from '@zweer/publish-dummy-package';
 
 // Check npm login
-const username = checkNpmLogin()
+const username = checkNpmLogin();
 
 // Discover packages
-const packages = discoverWorkspacePackages('./packages')
+const packages = discoverWorkspacePackages('./packages');
 
 // Publish all unpublished packages
 const results = publishDummyPackages({
   packagesDir: './packages',
   access: 'public',
   dryRun: false,
-})
+});
 ```
 
 ## Prerequisites
