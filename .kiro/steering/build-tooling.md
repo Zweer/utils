@@ -98,7 +98,7 @@ npm run lint:engines       # Validate engine compatibility
 ### GitHub Actions
 
 - Workflow: `.github/workflows/ci.yml`
-- Tests on Node 20, 22, 24
+- Tests on Node 22, 24, 26
 - Release via `bonvoy shipit` on push to main
 
 ### Release Process

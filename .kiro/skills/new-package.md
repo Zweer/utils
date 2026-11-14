@@ -34,7 +34,7 @@ From root `package.json` or an existing package, extract:
   "bin": "./dist/cli/index.mjs",
   "files": ["dist"],
   "dependencies": {},
-  "engines": { "node": ">= 20.5" },
+  "engines": { "node": ">= 22.12" },
   "publishConfig": { "access": "public", "provenance": true }
 }
 ```
