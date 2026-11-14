@@ -31,16 +31,18 @@
     "./bin": "./dist/bin.mjs",
     "./package.json": "./package.json"
   },
-  "bin": "./dist/bin.mjs",
+  "bin": {
+    "llms-txt": "./dist/bin.mjs"
+  },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@commander-js/extra-typings": "^14.0.0",
-    "commander": "^14.0.3"
+    "@commander-js/extra-typings": "^15.1.0",
+    "commander": "^15.1.0"
   },
   "engines": {
-    "node": ">= 20.5"
+    "node": ">= 22.12"
   },
   "publishConfig": {
     "access": "public",

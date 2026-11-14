@@ -19,10 +19,12 @@ When working with AI models, you often need to provide the full context of your 
 ## 📦 Installation
 
 You can install the package globally:
+
 ```bash
 npm install -g @zweer/export-code
 ```
 Or use it directly with `npx` for on-the-fly execution:
+
 ```bash
 npx @zweer/export-code --help
 ```
@@ -41,7 +43,7 @@ If you don't specify an output file, it will default to `docs/EXPORT.md`.
 
 The generated file will have a structure like this, making it easy for both humans and AI to read:
 
-`````markdown
+````markdown
 # EXPORT
 
 ## File structure
@@ -68,6 +70,7 @@ console.log("Hello, World!");
 ---
 
 `src/utils.js`:
+
 ```javascript
 export const a = () => {
   return 'a';
@@ -77,22 +80,23 @@ export const a = () => {
 ---
 
 `package.json`:
+
 ```json
 {
   "name": "my-project",
   "version": "1.0.0"
 }
 ```
-`````
+````
 
 ## 🛠️ Options & Configuration
 
 ### Command-Line Arguments
 
-| Argument | Description | Default | Required |
-| :--- | :--- | :--- | :--- |
-| `[outputFile]` | The path where the final text file will be saved. | `docs/EXPORT.md`| No |
-| `--ignore-list <paths>` | A comma-separated list of glob patterns to ignore. For example: `src/generated/**,*.test.ts` | `''` | No |
+| Argument                | Description                                                                                  | Default          | Required |
+| :---------------------- | :------------------------------------------------------------------------------------------- | :--------------- | :------- |
+| `[outputFile]`          | The path where the final text file will be saved.                                            | `docs/EXPORT.md` | No       |
+| `--ignore-list <paths>` | A comma-separated list of glob patterns to ignore. For example: `src/generated/**,*.test.ts` | `''`             | No       |
 
 ### Ignoring Files
 

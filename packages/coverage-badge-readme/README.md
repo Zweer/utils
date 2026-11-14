@@ -18,6 +18,7 @@ Your testing framework must be configured to generate a coverage summary report 
 For **Jest**, **Vitest**, or **Istanbul/nyc**, add `json-summary` to your `coverageReporters` configuration.
 
 Example for `jest.config.js` or `vite.config.ts`:
+
 ```javascript
 // jest.config.js
 module.exports = {
@@ -31,10 +32,12 @@ This will generate the required `coverage/coverage-summary.json` file when you r
 ## 📦 Installation
 
 You can install the package globally:
+
 ```bash
 npm install -g @zweer/coverage-badge-readme
 ```
 Or use it directly with `npx` without a global installation (recommended for CI environments):
+
 ```bash
 npx @zweer/coverage-badge-readme --help
 ```
@@ -56,18 +59,19 @@ npx @zweer/coverage-badge-readme --help
     ```
 
 Your `README.md` will be automatically updated:
+
 ```markdown
 ![Coverage Badge](https://img.shields.io/badge/coverage-88%25-brightgreen)
 ```
 
 ## 🛠️ Options
 
-| Option | Alias | Description | Default | Required |
-| :--- | :--- | :--- |:--- |:--- |
-| `--readme-path` | | Path to the README.md file. | `./README.md` | No |
-| `--coverage-path` | | Path to the `coverage-summary.json` file. | `./coverage/coverage-summary.json` | No |
-| `--coverage-metric` | | The coverage metric to use. Valid values: `lines`, `branches`, `functions`, `statements`, `branchesTrue`, `average`, `min`. | `lines` | No |
-| `--help` | `-h` | Show the help menu. | | |
+| Option              | Alias | Description                                                                                                                 | Default                            | Required |
+| :------------------ | :---- | :-------------------------------------------------------------------------------------------------------------------------- | :--------------------------------- | :------- |
+| `--readme-path`     |       | Path to the README.md file.                                                                                                 | `./README.md`                      | No       |
+| `--coverage-path`   |       | Path to the `coverage-summary.json` file.                                                                                   | `./coverage/coverage-summary.json` | No       |
+| `--coverage-metric` |       | The coverage metric to use. Valid values: `lines`, `branches`, `functions`, `statements`, `branchesTrue`, `average`, `min`. | `lines`                            | No       |
+| `--help`            | `-h`  | Show the help menu.                                                                                                         |                                    |          |
 
 ## 📄 License
 

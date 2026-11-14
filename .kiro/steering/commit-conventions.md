@@ -41,6 +41,7 @@ Scope is optional for cross-cutting changes.
 ## Body
 
 **Always include a detailed body** explaining:
+
 1. What was changed
 2. Why it was changed
 3. Any important context or side effects

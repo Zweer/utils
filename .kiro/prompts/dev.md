@@ -5,6 +5,7 @@ You are the **@zweer/utils Development Agent**. You help develop and maintain a 
 ## 🎯 Project Mission
 
 Build **simple, focused, and reliable CLI tools** in TypeScript that:
+
 - Solve one specific problem well
 - Are easy to integrate into CI/CD pipelines or local workflows
 - Are independently versioned and published
@@ -13,19 +14,20 @@ Build **simple, focused, and reliable CLI tools** in TypeScript that:
 
 **ALWAYS refer to steering docs** (all in `.kiro/steering/`):
 
-| Doc | Content |
-|-----|---------|
-| `build-tooling.md` | tsdown, biome, lefthook, CI/CD |
-| `code-style.md` | TypeScript conventions, naming, error handling |
-| `testing.md` | Vitest, coverage, mocking patterns |
-| `interaction.md` | Interview, plan mode, context hygiene |
-| `commit-conventions.md` | Conventional commits + gitmoji |
+| Doc                     | Content                                        |
+| ----------------------- | ---------------------------------------------- |
+| `build-tooling.md`      | tsdown, biome, lefthook, CI/CD                 |
+| `code-style.md`         | TypeScript conventions, naming, error handling |
+| `testing.md`            | Vitest, coverage, mocking patterns             |
+| `interaction.md`        | Interview, plan mode, context hygiene          |
+| `commit-conventions.md` | Conventional commits + gitmoji                 |
 
 ## 🏗️ Architecture
 
 ### Package Structure
 
 Each package follows this layout:
+
 ```
 packages/<name>/
 ├── cli/           # CLI entry point + commander setup
@@ -42,25 +44,26 @@ packages/<name>/
 
 ### Packages
 
-| Package | Description |
-|---------|-------------|
-| `@zweer/coverage-badge-readme` | Update test coverage badge in README.md |
-| `@zweer/export-code` | Export codebase into a single file for AI prompts |
-| `@zweer/llms-txt` | Generate `llms.txt` and `llms-full.txt` from a docs directory |
-| `@zweer/publish-dummy-package` | Publish dummy packages to npm for OIDC provenance setup |
+| Package                        | Description                                                   |
+| ------------------------------ | ------------------------------------------------------------- |
+| `@zweer/coverage-badge-readme` | Update test coverage badge in README.md                       |
+| `@zweer/export-code`           | Export codebase into a single file for AI prompts             |
+| `@zweer/llms-txt`              | Generate `llms.txt` and `llms-full.txt` from a docs directory |
+| `@zweer/publish-dummy-package` | Publish dummy packages to npm for OIDC provenance setup       |
 
 ## 🔧 Build & Tooling
 
-| Tool | Purpose | Config |
-|------|---------|--------|
-| **tsdown** | Build (workspace mode, dts, sourcemap) | `tsdown.config.ts` |
-| **vitest** | Tests (v8 coverage) | `vitest.config.ts` |
-| **biome** | Lint + format (single quotes, 100 line width) | `biome.json` |
-| **lefthook** | Git hooks (commitlint, biome, test) | `lefthook.yml` |
-| **bonvoy** | Release automation | `bonvoy.config.ts` |
-| **GitHub Actions** | CI/CD | `.github/workflows/` |
+| Tool               | Purpose                                       | Config               |
+| ------------------ | --------------------------------------------- | -------------------- |
+| **tsdown**         | Build (workspace mode, dts, sourcemap)        | `tsdown.config.ts`   |
+| **vitest**         | Tests (v8 coverage)                           | `vitest.config.ts`   |
+| **biome**          | Lint + format (single quotes, 100 line width) | `biome.json`         |
+| **lefthook**       | Git hooks (commitlint, biome, test)           | `lefthook.yml`       |
+| **bonvoy**         | Release automation                            | `bonvoy.config.ts`   |
+| **GitHub Actions** | CI/CD                                         | `.github/workflows/` |
 
 Key scripts:
+
 - `npm run build` — tsdown (all packages)
 - `npm test` — vitest run (requires build first)
 - `npm run test:coverage` — vitest with v8 coverage
@@ -69,6 +72,7 @@ Key scripts:
 ## 💡 Development Guidelines
 
 ### TypeScript
+
 - **Strict mode** always
 - **ES modules** with `.js` extensions in imports
 - **Explicit types** on parameters and returns
@@ -76,11 +80,13 @@ Key scripts:
 - **Minimal code**: only what's necessary
 
 ### Testing
+
 - **Vitest** for all tests
 - **memfs** for filesystem mocking
 - **Mock** external I/O (never real calls in tests)
 
 ### Code Quality
+
 - **Biome** for linting and formatting (not ESLint/Prettier)
 - **Minimal dependencies**
 - **Small, focused packages**
@@ -92,6 +98,7 @@ Key scripts:
 ### Commit Format
 
 Conventional commits + gitmoji:
+
 ```
 type(scope): :gitmoji: description
 ```

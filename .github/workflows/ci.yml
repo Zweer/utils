@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       bump:
-        description: 'Version bump (patch/minor/major/x.y.z)'
+        description: "Version bump (patch/minor/major/x.y.z)"
         required: false
         type: string
 
@@ -19,8 +19,8 @@ jobs:
       matrix:
         node-version: [22, 24, 26]
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g npm@11
@@ -35,14 +35,14 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: lts/*
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
 
       - run: npm ci
       - run: npm run build

@@ -3,8 +3,8 @@ name: Dependabot Lockfile Fix
 on:
   pull_request:
     paths:
-      - 'package.json'
-      - 'packages/*/package.json'
+      - "package.json"
+      - "packages/*/package.json"
 
 permissions:
   contents: write
@@ -14,12 +14,12 @@ jobs:
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: lts/*
 
@@ -31,4 +31,16 @@ jobs:
           git config user.name "github-actions[bot]"
           git add package-lock.json
           git diff --cached --quiet || git commit -m "fix: :lock: regenerate lockfile"
+          git push
+
+      - run: npx @biomejs/biome migrate --write
+
+      - run: npx sort-package-json "package.json" "packages/*/package.json"
+
+      - name: Commit post-update fixes
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add biome.json package.json packages/*/package.json
+          git diff --cached --quiet || git commit -m "chore: :wrench: post-update fixes (biome migrate, sort)"
           git push

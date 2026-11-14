@@ -31,7 +31,7 @@ export function retrieveFilenames(options: Partial<RetrieveFilenamesOptions> = {
   const files2export = ignore()
     .add(ignoreFiles)
     .filter(files)
-    .filter((file) => !statSync(file).isDirectory())
+    .filter((file) => !statSync(join(baseDir, file)).isDirectory())
     .sort();
 
   return files2export.map((file) => join(baseDir, file));

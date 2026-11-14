@@ -146,16 +146,15 @@ describe('lib -> badge', () => {
           'in the badge template!',
         ],
       },
-    ])('should warn if it contains only the $template placeholder', ({
-      template,
-      expectedWarning,
-      expectedBadge,
-    }) => {
-      expect(createBadge(percentage, undefined, template)).toBe(expectedBadge);
+    ])(
+      'should warn if it contains only the $template placeholder',
+      ({ template, expectedWarning, expectedBadge }) => {
+        expect(createBadge(percentage, undefined, template)).toBe(expectedBadge);
 
-      expect(consoleLogSpy).not.toHaveBeenCalled();
-      expect(consoleWarnSpy).toHaveBeenCalledWith(...expectedWarning);
-      expect(consoleErrorSpy).not.toHaveBeenCalled();
-    });
+        expect(consoleLogSpy).not.toHaveBeenCalled();
+        expect(consoleWarnSpy).toHaveBeenCalledWith(...expectedWarning);
+        expect(consoleErrorSpy).not.toHaveBeenCalled();
+      },
+    );
   });
 });

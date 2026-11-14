@@ -66,6 +66,6 @@ const results = publishDummyPackages({
 
 ## Prerequisites
 
-- Node.js >= 20.5
+- Node.js >= 22.12
 - Each package must have a valid `package.json` with a `name` field
 - The root `package.json` must have a `workspaces` field

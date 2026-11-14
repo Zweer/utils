@@ -5,10 +5,12 @@ updates:
     schedule:
       interval: weekly
       day: monday
-      time: "03:00"
+      time: "09:00"
     open-pull-requests-limit: 10
+    reviewers:
+      - Zweer
     commit-message:
-      prefix: "perf"
+      prefix: "fix"
       prefix-development: "chore"
       include: "scope"
     labels:
@@ -31,7 +33,7 @@ updates:
     schedule:
       interval: weekly
       day: monday
-      time: "03:00"
+      time: "09:00"
     commit-message:
       prefix: "ci"
     labels:

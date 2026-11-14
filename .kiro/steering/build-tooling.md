@@ -3,6 +3,7 @@
 ## Build System
 
 ### tsdown
+
 - **tsdown** for building all packages (NOT tsc, esbuild, rollup)
 - Configuration: `tsdown.config.ts` at root
 - Workspace mode: builds all packages in one pass
@@ -10,6 +11,7 @@
 - tsc is only used for type-checking (`tsc --noEmit`)
 
 ### Build Output
+
 ```
 packages/<name>/
 └── dist/
@@ -21,6 +23,7 @@ packages/<name>/
 ```
 
 ### Build Commands
+
 ```bash
 npm run build              # Build all packages
 npm run clean              # Remove dist/
@@ -29,6 +32,7 @@ npm run clean              # Remove dist/
 ## Package Configuration
 
 ### package.json Exports
+
 ```json
 {
   "type": "module",
@@ -42,6 +46,7 @@ npm run clean              # Remove dist/
 ```
 
 ### TypeScript Configuration
+
 - Root `tsconfig.json` applies to all packages
 - No per-package `tsconfig.json` needed
 - Strict mode enabled
@@ -51,6 +56,7 @@ npm run clean              # Remove dist/
 ## Linting & Formatting
 
 ### Biome
+
 - **Biome** for linting and formatting (NOT ESLint/Prettier)
 - Configuration: `biome.json` at root
 - Single quotes, 100 line width
@@ -58,6 +64,7 @@ npm run clean              # Remove dist/
 - Import sorting with grouped blank lines
 
 ### Commands
+
 ```bash
 npm run lint               # All linters in parallel
 npm run lint:format        # Biome check + fix
@@ -65,12 +72,13 @@ npm run lint:typecheck     # TypeScript check
 npm run lint:lockfile      # Lockfile security
 npm run lint:package       # package.json validation
 npm run lint:sort_package  # Sort package.json keys
-npm run lint:engines       # Validate engine compatibility
+npm run lint:engines       # Validate engines against the dependency graph (installed-check)
 ```
 
 ## Git Hooks
 
 ### Lefthook
+
 - **Lefthook** for git hooks (NOT husky + lint-staged)
 - Configuration: `lefthook.yml` at root
 - Pre-commit: biome → lockfile → package-lint → sort → build → typecheck → test
@@ -80,6 +88,7 @@ npm run lint:engines       # Validate engine compatibility
 ## Package Manager
 
 ### npm
+
 - Use **npm** (NOT pnpm or yarn)
 - Lock file: `package-lock.json`
 - Workspaces enabled in root `package.json`
@@ -87,27 +96,29 @@ npm run lint:engines       # Validate engine compatibility
 ## CI/CD
 
 ### GitHub Actions
+
 - Workflow: `.github/workflows/ci.yml`
-- Tests on Node 20, 22, 24
+- Tests on Node 22, 24, 26
 - Release via `bonvoy shipit` on push to main
 
 ### Release Process
+
 - Automated via bonvoy in CI
 - Independent versioning per package
 - Creates git tags, GitHub releases, publishes to npm
 
 ## Scripts Reference
 
-| Script | Description |
-|--------|-------------|
-| `npm run build` | Build with tsdown |
-| `npm run clean` | Remove dist/ |
-| `npm run lint` | All linters in parallel |
-| `npm run lint:format` | Biome check + fix |
-| `npm run lint:typecheck` | TypeScript check |
-| `npm run lint:lockfile` | Lockfile security |
-| `npm run lint:package` | package.json validation |
-| `npm run lint:sort_package` | Sort package.json keys |
-| `npm run lint:engines` | Validate engine compatibility |
-| `npm test` | Run tests |
-| `npm run test:coverage` | Tests with coverage |
+| Script                      | Description                        |
+| --------------------------- | ---------------------------------- |
+| `npm run build`             | Build with tsdown                  |
+| `npm run clean`             | Remove dist/                       |
+| `npm run lint`              | All linters in parallel            |
+| `npm run lint:format`       | Biome check + fix                  |
+| `npm run lint:typecheck`    | TypeScript check                   |
+| `npm run lint:lockfile`     | Lockfile security                  |
+| `npm run lint:package`      | package.json validation            |
+| `npm run lint:sort_package` | Sort package.json keys             |
+| `npm run lint:engines`      | Validate engines (installed-check) |
+| `npm test`                  | Run tests                          |
+| `npm run test:coverage`     | Tests with coverage                |

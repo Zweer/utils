@@ -25,7 +25,7 @@ pre-commit:
       priority: 2
     typecheck:
       glob: "*.ts"
-      run: tsc --noEmit
+      run: npm run lint:typecheck
       priority: 3
     test:
       glob: "*.ts"
