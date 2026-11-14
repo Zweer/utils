@@ -70,7 +70,7 @@
     "@zweer/coverage-badge-readme": "^1.4.0",
     "astro": "^7.4.11",
     "bonvoy": "^0.13.1",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.3",
     "lefthook": "^2.1.9",
     "lockfile-lint": "^5.0.0",
     "ls-engines": "^0.10.1",
